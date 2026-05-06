@@ -15,23 +15,59 @@ import {
   Monitor,
 } from "lucide-react";
 import screenshot from "@/assets/eom-screenshot.png";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_OG_IMAGE, SITE_URL } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
       { title: "EOM — Eye On Metadata · Free open-source metadata tool" },
+      { name: "description", content: SITE_DESCRIPTION },
+      // Open Graph
+      { property: "og:url", content: SITE_URL },
+      { property: "og:title", content: SITE_NAME },
+      { property: "og:description", content: SITE_DESCRIPTION },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { property: "og:image:width", content: "1280" },
+      { property: "og:image:height", content: "832" },
+      { property: "og:image:alt", content: "EOM desktop app showing a metadata table with EXIF fields" },
+      // Twitter / X
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: SITE_NAME },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
+      // JSON-LD structured data
       {
-        name: "description",
-        content:
-          "EOM reads, exports, and strips metadata from images, audio, video, and PDFs — locally, with no upload, no account, no cloud.",
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: SITE_NAME,
+          description: SITE_DESCRIPTION,
+          url: SITE_URL,
+          applicationCategory: "UtilitiesApplication",
+          operatingSystem: "Windows, macOS, Linux",
+          softwareVersion: "1.0",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+          },
+          featureList: [
+            "Extract EXIF, XMP, IPTC, ID3, and PDF metadata",
+            "Remove / strip metadata in place or to a copy",
+            "Export metadata as JSON, CSV, or plain text",
+            "ExifTool integration",
+            "Supports JPEG, PNG, TIFF, MP3, FLAC, OGG, WAV, AIFF, M4A, WMA, MP4, MKV, WebM, PDF",
+            "100% local — no upload, no account, no cloud",
+          ],
+          isAccessibleForFree: true,
+          license: "https://opensource.org/licenses/MIT",
+          codeRepository: "https://github.com/abogo-nono",
+        },
       },
-      { property: "og:title", content: "EOM — Eye On Metadata" },
-      {
-        property: "og:description",
-        content:
-          "Free open-source desktop tool to read, export, and strip metadata. Local-only.",
-      },
+    ],
+    links: [
+      { rel: "canonical", href: SITE_URL },
     ],
   }),
 });
@@ -50,7 +86,7 @@ function Navbar() {
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="#" className="flex items-center gap-2.5">
-          <GlowEye className="h-6 w-6" />
+          <img src="/favicon.ico" alt="EOM logo" className="h-6 w-6" />
           <span className="font-mono text-base font-semibold tracking-wide">
             EOM
           </span>
@@ -83,7 +119,7 @@ function Hero() {
         <div>
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
             <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-            v1.0 · Free &amp; open source
+            v2.0 · Free &amp; open source
           </div>
           <h1 className="text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
             See what your files are hiding.
@@ -286,25 +322,29 @@ const downloads = [
     os: "Linux x86-64",
     note: "Ubuntu 20.04+",
     file: "eom-1.0.0-linux-x86_64.AppImage",
+    link: "https://github.com/abogo-nono/eom/releases/download/v0.1.0/eom-linux-x86_64.zip"
   },
   {
     icon: Monitor,
     os: "Windows x86-64",
     note: "includes exiftool.exe",
     file: "eom-1.0.0-windows-x86_64.exe",
+    link: "https://github.com/abogo-nono/eom/releases/download/v0.1.0/eom-windows-x86_64.zip"
   },
   {
     icon: Apple,
     os: "macOS Intel",
     note: "macOS 12+",
-    file: "eom-1.0.0-macos-x86_64.dmg",
-  },
-  {
-    icon: Apple,
-    os: "macOS Apple Silicon",
-    note: "macOS 14+",
     file: "eom-1.0.0-macos-arm64.dmg",
+    link: "https://github.com/abogo-nono/eom/releases/download/v0.1.0/eom-macos-arm64.zip"
   },
+  // {
+  //   icon: Apple,
+  //   os: "macOS Apple Silicon",
+  //   note: "macOS 14+",
+  //   file: "eom-1.0.0-macos-arm64.dmg",
+  //   link: ""
+  // },
 ];
 
 function DownloadSection() {
@@ -343,7 +383,7 @@ function DownloadSection() {
                 </div>
               </div>
               <a
-                href="https://github.com/abogo-nono"
+                href={d.link}
                 className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
               >
                 <Download className="h-4 w-4" />

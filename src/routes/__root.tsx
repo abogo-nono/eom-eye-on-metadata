@@ -1,6 +1,7 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_OG_IMAGE, SITE_URL } from "@/lib/site";
 
 function NotFoundComponent() {
   return (
@@ -29,20 +30,32 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      // Fallback title / description (per-route head() overrides these)
+      { title: SITE_NAME },
+      { name: "description", content: SITE_DESCRIPTION },
+      // Open Graph — global
+      { property: "og:site_name", content: SITE_NAME },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:title", content: SITE_NAME },
+      { property: "og:description", content: SITE_DESCRIPTION },
+      { property: "og:image", content: SITE_OG_IMAGE },
+      { property: "og:image:width", content: "1280" },
+      { property: "og:image:height", content: "832" },
+      { property: "og:image:alt", content: "EOM desktop app showing a metadata table with EXIF fields" },
+      // Twitter / X
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: SITE_NAME },
+      { name: "twitter:description", content: SITE_DESCRIPTION },
+      { name: "twitter:image", content: SITE_OG_IMAGE },
+      // Misc
+      { name: "theme-color", content: "#0a0a0a" },
+      { name: "color-scheme", content: "dark light" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "shortcut icon", href: "/favicon.ico", type: "image/x-icon" },
     ],
   }),
   shellComponent: RootShell,

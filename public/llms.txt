@@ -31,5 +31,5 @@ EOM (Eye On Metadata) is a cross-platform desktop tool that lets users inspect a
 
 ## Links
 
-- Website: https://eom.abogonono.me
+- Website: https://abogo-nono.github.io/eom
 - GitHub: https://github.com/abogo-nono

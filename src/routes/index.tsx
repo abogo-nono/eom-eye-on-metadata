@@ -27,21 +27,21 @@ export const Route = createFileRoute("/")({
       },
       { name: "keywords", content: "metadata viewer, EXIF reader, metadata remover, IPTC, XMP, ID3, PDF metadata, privacy, open source, desktop app" },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://eom.abogonono.me" },
+      { property: "og:url", content: "https://abogo-nono.github.io/eom" },
       { property: "og:title", content: "EOM — Eye On Metadata" },
       {
         property: "og:description",
         content:
           "Free open-source desktop tool to read, export, and strip metadata. Local-only.",
       },
-      { property: "og:image", content: "https://eom.abogonono.me/og-image.png" },
+      { property: "og:image", content: "https://abogo-nono.github.io/eom/og-image.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       { property: "og:image:alt", content: "EOM — Eye On Metadata desktop app screenshot" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:title", content: "EOM — Eye On Metadata" },
       { name: "twitter:description", content: "Free open-source desktop tool to read, export, and strip metadata. Local-only." },
-      { name: "twitter:image", content: "https://eom.abogonono.me/og-image.png" },
+      { name: "twitter:image", content: "https://abogo-nono.github.io/eom/og-image.png" },
     ],
     scripts: [
       {
@@ -50,7 +50,7 @@ export const Route = createFileRoute("/")({
           "@context": "https://schema.org",
           "@type": "SoftwareApplication",
           name: "EOM — Eye On Metadata",
-          url: "https://eom.abogonono.me",
+          url: "https://abogo-nono.github.io/eom",
           description:
             "EOM reads, exports, and strips metadata from images, audio, video, and PDFs — locally, with no upload, no account, no cloud.",
           applicationCategory: "UtilitiesApplication",

@@ -35,7 +35,7 @@ export const Route = createRootRoute({
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/app-logo.ico" },
-      { rel: "canonical", href: "https://eom.abogonono.me" },
+      { rel: "canonical", href: "https://abogo-nono.github.io/eom" },
     ],
   }),
   shellComponent: RootShell,

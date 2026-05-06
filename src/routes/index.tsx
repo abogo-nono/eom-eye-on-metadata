@@ -68,7 +68,7 @@ export const Route = createFileRoute("/")({
             "Strip metadata in place or to a copy",
             "Local-only processing — no uploads",
           ],
-          softwareVersion: "1.0",
+          softwareVersion: "0.1.0",
           license: "https://opensource.org/licenses/MIT",
         }),
       },
@@ -114,7 +114,7 @@ function Hero() {
         <div>
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
             <img src="/app-logo.ico" alt="" className="h-4 w-4 object-contain" />
-            v1.0 · Free &amp; open source
+            v0.1.0 · Free &amp; open source
           </div>
           <h1 className="text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
             See what your files are hiding.
@@ -311,30 +311,29 @@ function ExifToolCallout() {
   );
 }
 
+const BASE = "https://github.com/abogo-nono/eom/releases/download/v0.1.0";
+
 const downloads = [
   {
     icon: Monitor,
     os: "Linux x86-64",
     note: "Ubuntu 20.04+",
-    file: "eom-1.0.0-linux-x86_64.AppImage",
+    file: "eom-linux-x86_64.zip",
+    href: `${BASE}/eom-linux-x86_64.zip`,
   },
   {
     icon: Monitor,
     os: "Windows x86-64",
     note: "includes exiftool.exe",
-    file: "eom-1.0.0-windows-x86_64.exe",
-  },
-  {
-    icon: Apple,
-    os: "macOS Intel",
-    note: "macOS 12+",
-    file: "eom-1.0.0-macos-x86_64.dmg",
+    file: "eom-windows-x86_64.zip",
+    href: `${BASE}/eom-windows-x86_64.zip`,
   },
   {
     icon: Apple,
     os: "macOS Apple Silicon",
     note: "macOS 14+",
-    file: "eom-1.0.0-macos-arm64.dmg",
+    file: "eom-macos-arm64.zip",
+    href: `${BASE}/eom-macos-arm64.zip`,
   },
 ];
 
@@ -374,7 +373,8 @@ function DownloadSection() {
                 </div>
               </div>
               <a
-                href="https://github.com/abogo-nono"
+                href={d.href}
+                download
                 className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
               >
                 <Download className="h-4 w-4" />

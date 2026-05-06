@@ -33,6 +33,8 @@ export const Route = createRootRoute({
       { name: "theme-color", content: "#0b0f0f" },
     ],
     links: [
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: "/app-logo.ico" },
       { rel: "canonical", href: "https://abogo-nono.github.io/eom" },

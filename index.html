@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>EOM — Eye On Metadata · Free open-source metadata tool</title>
+    <meta name="description" content="Free open-source desktop tool to read, export, and strip metadata from images, audio, video, and PDFs — locally, with no upload, no account, no cloud." />
+    <meta name="author" content="abogo-nono" />
+    <meta name="theme-color" content="#0a0a0a" />
+    <meta name="color-scheme" content="dark light" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="EOM — Eye On Metadata" />
+    <meta property="og:url" content="https://eom.app/" />
+    <meta property="og:title" content="EOM — Eye On Metadata" />
+    <meta property="og:description" content="Free open-source desktop tool to read, export, and strip metadata from images, audio, video, and PDFs — locally, with no upload, no account, no cloud." />
+    <meta property="og:image" content="https://eom.app/og-image.png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="832" />
+    <meta property="og:image:alt" content="EOM desktop app showing a metadata table with EXIF fields" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="EOM — Eye On Metadata" />
+    <meta name="twitter:description" content="Free open-source desktop tool to read, export, and strip metadata. Local-only." />
+    <meta name="twitter:image" content="https://eom.app/og-image.png" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://eom.app/" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="%BASE_URL%favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="%BASE_URL%favicon.ico" />
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "EOM — Eye On Metadata",
+      "description": "Free open-source desktop tool to read, export, and strip metadata from images, audio, video, and PDFs — locally, with no upload, no account, no cloud.",
+      "url": "https://eom.app",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "Windows, macOS, Linux",
+      "softwareVersion": "1.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Extract EXIF, XMP, IPTC, ID3, and PDF metadata",
+        "Remove / strip metadata in place or to a copy",
+        "Export metadata as JSON, CSV, or plain text",
+        "ExifTool integration",
+        "Supports JPEG, PNG, TIFF, MP3, FLAC, OGG, WAV, AIFF, M4A, WMA, MP4, MKV, WebM, PDF",
+        "100% local — no upload, no account, no cloud"
+      ],
+      "isAccessibleForFree": true,
+      "license": "https://opensource.org/licenses/MIT",
+      "codeRepository": "https://github.com/abogo-nono"
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

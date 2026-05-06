@@ -1,0 +1,35 @@
+# EOM — Eye On Metadata
+
+> Free, open-source desktop application to read, export, and strip metadata from files — entirely locally.
+
+EOM (Eye On Metadata) is a cross-platform desktop tool that lets users inspect and manage file metadata without uploading anything to the cloud. It supports EXIF, XMP, IPTC (images), ID3 (audio), and PDF metadata. Users can export metadata as JSON, CSV, or plain text and strip tags in place or to a copy. ExifTool is used when available for maximum format coverage.
+
+## Key facts
+
+- **Name**: EOM — Eye On Metadata
+- **Type**: Desktop application (utility)
+- **License**: MIT (open source)
+- **Version**: 1.0
+- **Platforms**: Windows, macOS, Linux
+- **Price**: Free
+- **Privacy**: 100% local processing — no uploads, no account, no cloud
+
+## Supported formats
+
+- **Images**: JPEG, PNG, TIFF (EXIF, XMP, IPTC)
+- **Audio**: MP3, FLAC, OGG, WAV, AIFF, M4A, WMA (ID3)
+- **Video**: MP4, MKV, WebM
+- **Documents**: PDF
+
+## Features
+
+- Extract metadata (EXIF, XMP, IPTC, ID3, PDF tags)
+- Remove / strip metadata in place or to a clean copy
+- Export as JSON, CSV, or plain text
+- ExifTool integration for extended format support
+- No telemetry, no network requests during operation
+
+## Links
+
+- Website: https://eom.abogonono.me
+- GitHub: https://github.com/abogo-nono

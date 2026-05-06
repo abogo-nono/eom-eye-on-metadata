@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
-  Eye,
   Github,
   Download,
   Image as ImageIcon,
@@ -26,31 +25,63 @@ export const Route = createFileRoute("/")({
         content:
           "EOM reads, exports, and strips metadata from images, audio, video, and PDFs — locally, with no upload, no account, no cloud.",
       },
+      { name: "keywords", content: "metadata viewer, EXIF reader, metadata remover, IPTC, XMP, ID3, PDF metadata, privacy, open source, desktop app" },
+      { property: "og:type", content: "website" },
+      { property: "og:url", content: "https://eom.abogonono.me" },
       { property: "og:title", content: "EOM — Eye On Metadata" },
       {
         property: "og:description",
         content:
           "Free open-source desktop tool to read, export, and strip metadata. Local-only.",
       },
+      { property: "og:image", content: "https://eom.abogonono.me/og-image.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:image:alt", content: "EOM — Eye On Metadata desktop app screenshot" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "EOM — Eye On Metadata" },
+      { name: "twitter:description", content: "Free open-source desktop tool to read, export, and strip metadata. Local-only." },
+      { name: "twitter:image", content: "https://eom.abogonono.me/og-image.png" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          name: "EOM — Eye On Metadata",
+          url: "https://eom.abogonono.me",
+          description:
+            "EOM reads, exports, and strips metadata from images, audio, video, and PDFs — locally, with no upload, no account, no cloud.",
+          applicationCategory: "UtilitiesApplication",
+          operatingSystem: "Windows, macOS, Linux",
+          offers: {
+            "@type": "Offer",
+            price: "0",
+            priceCurrency: "USD",
+          },
+          featureList: [
+            "Read EXIF, XMP, IPTC metadata from images",
+            "Read ID3 metadata from audio files",
+            "Read metadata from video files and PDFs",
+            "Export metadata as JSON, CSV, or plain text",
+            "Strip metadata in place or to a copy",
+            "Local-only processing — no uploads",
+          ],
+          softwareVersion: "1.0",
+          license: "https://opensource.org/licenses/MIT",
+        }),
+      },
     ],
   }),
 });
-
-function GlowEye({ className = "" }: { className?: string }) {
-  return (
-    <Eye
-      className={`text-primary eye-glow ${className}`}
-      strokeWidth={2}
-    />
-  );
-}
 
 function Navbar() {
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
         <a href="#" className="flex items-center gap-2.5">
-          <GlowEye className="h-6 w-6" />
+          <img src="/app-logo.ico" alt="EOM logo" className="h-6 w-6 object-contain" />
           <span className="font-mono text-base font-semibold tracking-wide">
             EOM
           </span>
@@ -82,7 +113,7 @@ function Hero() {
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+            <img src="/app-logo.ico" alt="" className="h-4 w-4 object-contain" />
             v1.0 · Free &amp; open source
           </div>
           <h1 className="text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
@@ -249,7 +280,7 @@ function ExifToolCallout() {
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <GlowEye className="h-5 w-5" />
+                <img src="/app-logo.ico" alt="EOM logo" className="h-5 w-5 object-contain" />
                 <span className="font-mono text-sm">EOM</span>
               </div>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-success/15 px-3 py-1 font-mono text-xs text-success">
@@ -265,7 +296,7 @@ function ExifToolCallout() {
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <GlowEye className="h-5 w-5" />
+                <img src="/app-logo.ico" alt="EOM logo" className="h-5 w-5 object-contain" />
                 <span className="font-mono text-sm">EOM</span>
               </div>
               <span className="inline-flex items-center gap-1.5 rounded-full bg-warning/15 px-3 py-1 font-mono text-xs text-warning">

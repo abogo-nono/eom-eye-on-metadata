@@ -4,11 +4,11 @@ EOM is a free, open-source, cross-platform desktop application for reading, expo
 
 ## Key facts
 
-- Version: 0.1.0
+- Version: 2.0.0 
 - License: MIT
 - Website: https://abogo-nono.github.io/eom
 - Source code: https://github.com/abogo-nono/eom
-- Download: https://github.com/abogo-nono/eom/releases/tag/v0.1.0
+- Download: https://github.com/abogo-nono/eom/releases/tag/v2.0.0 
 - Author: Abogo Lincoln (https://github.com/abogo-nono)
 - Platforms: Windows (x86-64), Linux (x86-64, Ubuntu 20.04+), macOS (Apple Silicon, macOS 14+)
 - Price: free
@@ -78,8 +78,8 @@ Online tools upload your file to a remote server, which means your photos, docum
 - Landing page: https://abogo-nono.github.io/eom
 - GitHub repository: https://github.com/abogo-nono/eom
 - Releases: https://github.com/abogo-nono/eom/releases
-- v0.1.0 release notes: https://github.com/abogo-nono/eom/releases/tag/v0.1.0
-- Linux download: https://github.com/abogo-nono/eom/releases/download/v0.1.0/eom-linux-x86_64.zip
-- Windows download: https://github.com/abogo-nono/eom/releases/download/v0.1.0/eom-windows-x86_64.zip
-- macOS download: https://github.com/abogo-nono/eom/releases/download/v0.1.0/eom-macos-arm64.zip
+- v2.0.0  release notes: https://github.com/abogo-nono/eom/releases/tag/v2.0.0 
+- Linux download: https://github.com/abogo-nono/eom/releases/download/v2.0.0 /eom-linux-x86_64.zip
+- Windows download: https://github.com/abogo-nono/eom/releases/download/v2.0.0 /eom-windows-x86_64.zip
+- macOS download: https://github.com/abogo-nono/eom/releases/download/v2.0.0 /eom-macos-arm64.zip
 

@@ -1,85 +1,70 @@
 # EOM — Eye On Metadata
 
-EOM is a free, open-source, cross-platform desktop application for reading, exporting, and stripping metadata from files. It runs entirely on the user's machine; no files are uploaded, no account is required, and no data leaves the device.
+EOM is a free, open-source, cross-platform desktop application (and command-line tool) that shows what files reveal through their metadata — location, author, device serial numbers, editing history — rates the privacy risk of each file, and removes the sensitive metadata. It runs entirely on the user's machine; no files are uploaded and no account is required.
 
 ## Key facts
 
-- Version: 2.0.0 
+- Latest version: 2.2.1
 - License: MIT
-- Website: https://abogo-nono.github.io/eom
+- Website: https://abogo-nono.github.io/eom-eye-on-metadata/
 - Source code: https://github.com/abogo-nono/eom
-- Download: https://github.com/abogo-nono/eom/releases/tag/v2.0.0 
+- Download (always the latest release): https://github.com/abogo-nono/eom/releases/latest
 - Author: Abogo Lincoln (https://github.com/abogo-nono)
-- Platforms: Windows (x86-64), Linux (x86-64, Ubuntu 20.04+), macOS (Apple Silicon, macOS 14+)
+- Platforms: Windows 10+ (x86-64), macOS 14+ (Apple Silicon), Linux x86-64 (Ubuntu 20.04+ / glibc 2.31+)
+- Interface languages: English, French
 - Price: free
-- Open source: yes
 
 ## What EOM does
 
-EOM reads and displays metadata embedded in files (EXIF, XMP, IPTC, ID3, container metadata), lets users export metadata as JSON, CSV, or plain text, and lets users strip metadata from a file — either selectively (individual tags) or all at once.
+- **Privacy-risk score**: every tag is classified (location, identity, unique IDs and serial numbers, device, dates, software, thumbnails, copyright, technical) and each file is rated High, Medium, Low or Clean from the most sensitive category it contains.
+- **Selective cleaning** with profiles: Remove everything, Full anonymity, Social media sharing, Keep copyright, Location only — or hand-picked categories and individual tags. A live preview shows which tags will be removed or kept.
+- **Safe by default**: cleaned copies can be written to another folder; EOM asks before modifying originals.
+- **Before / after verification**: every cleaned file is read again and compared with the original.
+- **Editing**: title, author, copyright, description and date; shift every date by a fixed offset (wrong camera clock); on one file or a whole folder.
+- **Export** to JSON, CSV, HTML report or plain text.
+- **Preview and map**: image, PDF and Office thumbnails, audio cover art; geotagged files on an OpenStreetMap map (opt-in).
+- **Command-line interface**: `eom extract | risk | clean | edit | profiles`.
 
 ## Supported formats
 
-- **Images**: JPEG, PNG, TIFF — reads EXIF, XMP, IPTC
-- **Audio**: MP3, FLAC, OGG, WAV, AIFF, M4A, WMA — reads ID3 and other audio tags
-- **Video**: MP4, MKV, WebM — reads container and embedded metadata
-- **Documents**: PDF — reads document metadata
-- **Extended support**: ExifTool integration provides coverage for hundreds of additional formats including RAW camera files (CR2, NEF, ARW, DNG, etc.)
+- **Images**: JPEG, PNG, TIFF, WebP, GIF, HEIC/HEIF (HEIC needs ExifTool)
+- **Audio**: MP3, FLAC, OGG, Opus, WAV, AIFF, M4A, WMA, APE, WavPack
+- **Video**: MP4, M4V, MOV, MKV, WebM
+- **Documents**: PDF, DOCX, XLSX, PPTX
+- **With ExifTool installed**: RAW camera files and hundreds of other formats (read)
 
 ## Privacy model
 
-EOM is designed around a strict privacy guarantee: all processing happens locally on the user's device. There is no network call, no telemetry, no analytics, and no cloud component. The Windows build ships with exiftool.exe bundled so even that dependency is offline-capable out of the box.
+All processing happens locally. There is no telemetry, no analytics and no account. EOM never needs an internet connection. Its only two network features are off by default and must be enabled in Settings: loading map tiles from OpenStreetMap, and checking GitHub for a new release.
+
+## Command line examples
+
+```
+eom risk ~/Pictures -r                                   # exit code 0 clean/low, 1 medium, 2 high
+eom clean ~/Pictures -r --profile social --output-dir ~/clean
+eom extract ~/Documents -r -o report.html
+eom edit photo.jpg --author "Jane" --shift +2h
+```
 
 ## Frequently asked questions
 
 **Does EOM upload my files?**
-No. Every operation is performed locally on your device. Nothing is sent to any server.
-
-**Is EOM free?**
-Yes. EOM is completely free and open source under the MIT license. There are no subscriptions, premium tiers, or hidden costs.
-
-**What operating systems does EOM support?**
-Linux (x86-64, Ubuntu 20.04+), Windows (x86-64), macOS (Apple Silicon, macOS 14+).
-
-**Do I need to install anything else?**
-No. EOM ships as a single binary with no installer. The Windows build bundles exiftool.exe. On Linux and macOS you can optionally install ExifTool system-wide for extended format coverage.
+No. Every operation is performed on your device.
 
 **How do I remove GPS location from a photo?**
-Open the file in EOM, find the GPS or EXIF section, then click Remove or Strip. You can strip individual tags or all metadata at once and save to a new file or overwrite in place.
+Drop the photo (or its folder) on EOM, choose the "Location only" or "Social media sharing" profile and click Clean. The preview shows what will be removed first; cleaned copies can be written to another folder.
 
-**What is ExifTool?**
-ExifTool is a widely-used open-source metadata library supporting hundreds of file formats including RAW camera files. EOM can use ExifTool as an optional backend for extended coverage. It is not required for core functionality.
+**Do I need ExifTool?**
+No. EOM uses ExifTool when it is installed and its built-in readers (Pillow, mutagen, pypdf) otherwise. The Windows download bundles ExifTool.
 
 **How is EOM different from online metadata tools?**
-Online tools upload your file to a remote server, which means your photos, documents, and the private metadata they contain (GPS coordinates, device serial numbers, author names) are transmitted to a third party. EOM processes everything locally — the file never leaves your computer.
-
-## When to use EOM
-
-- Before sharing a photo publicly, to remove embedded GPS coordinates and device information
-- Before sending a document to verify it contains no author or revision history
-- To audit a file and understand everything stored in its metadata
-- To export metadata records for archiving or cataloging purposes
-- To process files in an air-gapped or privacy-sensitive environment where cloud tools are not acceptable
-
-## EOM vs online metadata tools
-
-| Capability                    | Online tools | EOM |
-|-------------------------------|:------------:|:---:|
-| Processes files locally       | No           | Yes |
-| Requires internet             | Yes          | No  |
-| Account required              | Yes          | No  |
-| Costs money                   | often        | No  |
-| Open source                   | rarely       | Yes |
-| Works offline                 | No           | Yes |
-| File contents stay private    | No           | Yes |
+Online tools upload your file to a server. EOM processes everything locally, handles whole folders and rates the privacy risk of each file.
 
 ## Links
 
-- Landing page: https://abogo-nono.github.io/eom
+- Website: https://abogo-nono.github.io/eom-eye-on-metadata/ (French: https://abogo-nono.github.io/eom-eye-on-metadata/fr/)
 - GitHub repository: https://github.com/abogo-nono/eom
-- Releases: https://github.com/abogo-nono/eom/releases
-- v2.0.0  release notes: https://github.com/abogo-nono/eom/releases/tag/v2.0.0 
-- Linux download: https://github.com/abogo-nono/eom/releases/download/v2.0.0 /eom-linux-x86_64.zip
-- Windows download: https://github.com/abogo-nono/eom/releases/download/v2.0.0 /eom-windows-x86_64.zip
-- macOS download: https://github.com/abogo-nono/eom/releases/download/v2.0.0 /eom-macos-arm64.zip
-
+- Latest release and notes: https://github.com/abogo-nono/eom/releases/latest
+- Windows download: https://github.com/abogo-nono/eom/releases/latest/download/eom-windows-x86_64.zip
+- macOS download: https://github.com/abogo-nono/eom/releases/latest/download/eom-macos-arm64.zip
+- Linux download: https://github.com/abogo-nono/eom/releases/latest/download/eom-linux-x86_64.zip

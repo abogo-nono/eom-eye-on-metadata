@@ -5,20 +5,33 @@ import {
   Music,
   Video,
   FileText,
-  Eraser,
   FileDown,
-  Wrench,
-  ScanSearch,
   Apple,
   WifiOff,
   ShieldCheck,
   Lock,
   FolderOpen,
   Eye,
-  Trash2,
+  ShieldAlert,
+  SlidersHorizontal,
+  Columns2,
+  PencilLine,
+  Terminal,
+  ShieldCheck as CleanIcon,
+  User,
+  Hash,
+  MapPin,
+  Camera,
+  Code,
+  Clock,
+  ExternalLink,
 } from "lucide-react";
-import screenshot from "@/assets/eom-screenshot.png";
+import workspaceDark from "@/assets/workspace-dark.png";
+import workspaceLight from "@/assets/workspace-light.png";
+import workspaceFr from "@/assets/workspace-fr.png";
+import settingsDark from "@/assets/settings-dark.png";
 import { useLocale, useT } from "@/i18n/useLocale";
+import { APP_VERSION, AUTHOR_URL, DOWNLOADS, LATEST_RELEASE_URL, REPO_URL, asset } from "@/site";
 
 function LinuxIcon({ className }: { className?: string }) {
   return (
@@ -40,66 +53,100 @@ function WindowsIcon({ className }: { className?: string }) {
 
 function LangSwitcher({ size = "sm" }: { size?: "sm" | "xs" }) {
   const locale = useLocale();
-  const base = size === "xs" ? "text-xs" : "text-sm";
+  const t = useT();
+  const text = size === "xs" ? "text-xs" : "text-sm";
+  const item = (active: boolean) =>
+    `px-1.5 py-0.5 rounded transition-colors ${
+      active ? "text-primary font-semibold" : "text-muted-foreground hover:text-foreground"
+    }`;
   return (
-    <div className={`flex items-center gap-1 font-mono ${base}`}>
+    <nav
+      aria-label={t("langSwitcherLabel")}
+      className={`flex items-center gap-1 font-mono ${text}`}
+    >
       <a
-        href="/"
-        aria-label="Switch to English"
-        className={`px-1.5 py-0.5 rounded transition-colors ${
-          locale === "en"
-            ? "text-primary font-semibold"
-            : "text-muted-foreground hover:text-foreground"
-        }`}
+        href={asset("/")}
+        hrefLang="en"
+        lang="en"
+        aria-label="English"
+        className={item(locale === "en")}
       >
         EN
       </a>
-      <span className="text-border select-none">|</span>
+      <span className="text-border select-none" aria-hidden="true">
+        |
+      </span>
       <a
-        href="/fr/"
-        aria-label="Passer en français"
-        className={`px-1.5 py-0.5 rounded transition-colors ${
-          locale === "fr"
-            ? "text-primary font-semibold"
-            : "text-muted-foreground hover:text-foreground"
-        }`}
+        href={asset("/fr/")}
+        hrefLang="fr"
+        lang="fr"
+        aria-label="Français"
+        className={item(locale === "fr")}
       >
         FR
       </a>
+    </nav>
+  );
+}
+
+// ── Shared bits ───────────────────────────────────────────────────────────────
+
+function WindowFrame({ children, label }: { children: React.ReactNode; label?: string }) {
+  return (
+    <div className="rounded-xl border border-border bg-card p-2 shadow-2xl shadow-black/40">
+      <div className="flex items-center gap-1.5 px-3 py-2">
+        <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
+        <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
+        <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
+        {label && <span className="ml-3 font-mono text-xs text-muted-foreground">{label}</span>}
+      </div>
+      {children}
     </div>
   );
 }
+
+/** Renders `backticked` parts of a translated string as inline code. */
+function WithCode({ text }: { text: string }) {
+  return (
+    <>
+      {text.split("`").map((part, i) =>
+        i % 2 ? (
+          <code key={i} className="rounded bg-background px-1.5 py-0.5 font-mono text-foreground">
+            {part}
+          </code>
+        ) : (
+          part
+        ),
+      )}
+    </>
+  );
+}
+
+const primaryBtn =
+  "inline-flex items-center justify-center gap-2 rounded-md bg-primary text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors";
 
 // ── Navbar ────────────────────────────────────────────────────────────────────
 
 function Navbar() {
   const t = useT();
+  const locale = useLocale();
   return (
     <header className="sticky top-0 z-30 border-b border-border/60 bg-background/85 backdrop-blur">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-        <a href="#" className="flex items-center gap-2.5">
-          <img
-            src="/app-logo.ico"
-            alt="EOM logo"
-            className="h-6 w-6 object-contain"
-          />
-          <span className="font-mono text-base font-semibold tracking-wide">
-            EOM
-          </span>
+      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+        <a href={asset(locale === "fr" ? "/fr/" : "/")} className="flex items-center gap-2.5">
+          <img src={asset("/app-logo.ico")} alt="" className="h-6 w-6 object-contain" />
+          <span className="font-mono text-base font-semibold tracking-wide">EOM</span>
         </a>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <LangSwitcher />
           <a
-            href="https://github.com/abogo-nono"
+            href={REPO_URL}
             className="hidden sm:inline-flex items-center gap-2 px-3 py-2 text-sm text-foreground/80 hover:text-foreground transition-colors"
           >
             <Github className="h-4 w-4" />
             {t("navGithub")}
           </a>
-          <a
-            href="#download"
-            className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-          >
+          <a href="#download" className={`${primaryBtn} px-4 py-2`}>
             <Download className="h-4 w-4" />
             {t("navDownload")}
           </a>
@@ -114,130 +161,81 @@ function Navbar() {
 function Hero() {
   const t = useT();
   return (
-    <section className="mx-auto max-w-6xl px-6 pt-16 pb-20 lg:pt-24 lg:pb-28">
-      <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <section className="mx-auto max-w-6xl px-4 pt-14 pb-20 sm:px-6 lg:pt-20 lg:pb-24">
+      <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.25fr] lg:gap-14">
         <div>
-          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
-            <img
-              src="/app-logo.ico"
-              alt=""
-              className="h-4 w-4 object-contain"
-            />
-            {t("heroBadge")}
-          </div>
-          <h1 className="text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-6xl">
+          <a
+            href={LATEST_RELEASE_URL}
+            className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <img src={asset("/app-logo.ico")} alt="" className="h-4 w-4 object-contain" />v
+            {APP_VERSION} · {t("heroBadge")}
+          </a>
+          <h1 className="text-4xl font-semibold leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.4rem]">
             {t("heroHeading")}
           </h1>
           <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-[17px]">
             {t("heroSubtext")}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href="#download"
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-            >
+            <a href="#download" className={`${primaryBtn} px-5 py-3`}>
               <Download className="h-4 w-4" />
               {t("heroCtaDownload")}
             </a>
             <a
-              href="https://github.com/abogo-nono"
+              href={REPO_URL}
               className="inline-flex items-center gap-2 rounded-md border border-border bg-transparent px-5 py-3 text-sm font-medium text-foreground hover:bg-card transition-colors"
             >
               <Github className="h-4 w-4" />
               {t("heroCtaGithub")}
             </a>
           </div>
+          <p className="mt-4 font-mono text-xs text-muted-foreground">{t("heroPlatforms")}</p>
         </div>
 
-        <div className="relative">
-          <div className="rounded-xl border border-border bg-card p-2 shadow-2xl shadow-black/40">
-            <div className="flex items-center gap-1.5 px-3 py-2">
-              <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
-              <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
-              <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
-            </div>
-            <img
-              src={screenshot}
-              alt="EOM desktop application showing a metadata table with Make, Model, DateTime and GPSLatitude rows"
-              width={1280}
-              height={832}
-              className="block w-full rounded-md"
-            />
-          </div>
-        </div>
+        <WindowFrame>
+          <img
+            src={workspaceDark}
+            alt={t("heroScreenshotAlt")}
+            width={1280}
+            height={800}
+            fetchPriority="high"
+            className="block h-auto w-full rounded-md"
+          />
+        </WindowFrame>
       </div>
     </section>
   );
 }
 
-// ── Feature strip ─────────────────────────────────────────────────────────────
+// ── Features ──────────────────────────────────────────────────────────────────
 
-function FeatureStrip() {
+function Features() {
   const t = useT();
   const features = [
-    { icon: ScanSearch, name: t("feat1Name"), desc: t("feat1Desc") },
-    { icon: Eraser, name: t("feat2Name"), desc: t("feat2Desc") },
-    { icon: FileDown, name: t("feat3Name"), desc: t("feat3Desc") },
-    { icon: Wrench, name: t("feat4Name"), desc: t("feat4Desc") },
+    { icon: ShieldAlert, name: t("feat1Name"), desc: t("feat1Desc") },
+    { icon: SlidersHorizontal, name: t("feat2Name"), desc: t("feat2Desc") },
+    { icon: Columns2, name: t("feat3Name"), desc: t("feat3Desc") },
+    { icon: PencilLine, name: t("feat4Name"), desc: t("feat4Desc") },
+    { icon: FileDown, name: t("feat5Name"), desc: t("feat5Desc") },
+    { icon: Terminal, name: t("feat6Name"), desc: t("feat6Desc") },
   ];
   return (
-    <section className="mx-auto max-w-6xl px-6 pb-20">
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+      <div className="max-w-2xl">
+        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          {t("featuresHeading")}
+        </h2>
+        <p className="mt-3 text-muted-foreground">{t("featuresSubtext")}</p>
+      </div>
+      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((f) => (
-          <div
-            key={f.name}
-            className="rounded-lg border border-border bg-card p-5"
-          >
+          <div key={f.name} className="rounded-lg border border-border bg-card p-5">
             <f.icon className="h-5 w-5 text-primary" strokeWidth={2} />
-            <div className="mt-4 font-mono text-sm font-medium">{f.name}</div>
-            <p className="mt-1 text-sm text-muted-foreground">{f.desc}</p>
+            <h3 className="mt-4 text-sm font-semibold">{f.name}</h3>
+            <p className="mt-1.5 text-sm text-muted-foreground">{f.desc}</p>
           </div>
         ))}
-      </div>
-    </section>
-  );
-}
-
-// ── Formats ───────────────────────────────────────────────────────────────────
-
-function Formats() {
-  const t = useT();
-  const formatGroups = [
-    { icon: ImageIcon, label: t("formatImages"), items: ["JPEG", "PNG", "TIFF"] },
-    {
-      icon: Music,
-      label: t("formatAudio"),
-      items: ["MP3", "FLAC", "OGG", "WAV", "AIFF", "M4A", "WMA"],
-    },
-    { icon: Video, label: t("formatVideo"), items: ["MP4", "MKV", "WebM"] },
-    { icon: FileText, label: t("formatDocuments"), items: ["PDF"] },
-  ];
-  return (
-    <section className="border-y border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          {t("formatsHeading")}
-        </h2>
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {formatGroups.map((g) => (
-            <div key={g.label}>
-              <div className="flex items-center gap-2 text-foreground">
-                <g.icon className="h-4 w-4 text-primary" strokeWidth={2} />
-                <span className="text-sm font-medium">{g.label}</span>
-              </div>
-              <div className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-2 font-mono text-sm text-muted-foreground">
-                {g.items.map((it, i) => (
-                  <span key={it} className="flex items-center gap-2">
-                    <span className="text-foreground">{it}</span>
-                    {i < g.items.length - 1 && (
-                      <span className="h-1 w-1 rounded-full bg-primary" />
-                    )}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -247,95 +245,112 @@ function Formats() {
 
 function MetadataReveal() {
   const t = useT();
-  const rows = [
-    { tag: "Make", value: "Apple", sensitive: false },
-    { tag: "Model", value: "iPhone 15 Pro", sensitive: false },
-    { tag: "Software", value: "17.3.1", sensitive: false },
-    { tag: "DateTimeOriginal", value: "2024:03:14 08:42:31", sensitive: false },
-    { tag: "GPSLatitude", value: "48.8588° N", sensitive: true },
-    { tag: "GPSLongitude", value: "2.2944° E", sensitive: true },
-    { tag: "GPSAltitude", value: "35 m Above Sea Level", sensitive: true },
-    { tag: "Author", value: "John Smith", sensitive: true },
-    { tag: "SerialNumber", value: "DNPXQ2M5XXXX", sensitive: true },
-  ];
+  // Mirrors the app: tags grouped by category, with what the "Social media
+  // sharing" profile does to each of them.
+  const groups = [
+    { icon: User, label: t("catIdentity"), rows: [["Artist", "Jane Doe", true]] },
+    { icon: Hash, label: t("catIds"), rows: [["SerialNumber", "DNPXQ2M5", true]] },
+    {
+      icon: MapPin,
+      label: t("catLocation"),
+      rows: [
+        ["GPSLatitude", "48° 51' 30.2\" N", true],
+        ["GPSLongitude", "2° 17' 40.2\" E", true],
+        ["GPSAltitude", "35 m", true],
+      ],
+    },
+    {
+      icon: Camera,
+      label: t("catDevice"),
+      rows: [
+        ["Make", "Apple", true],
+        ["Model", "iPhone 15 Pro", true],
+      ],
+    },
+    { icon: Code, label: t("catSoftware"), rows: [["Software", "17.3.1", false]] },
+    {
+      icon: Clock,
+      label: t("catDates"),
+      rows: [["DateTimeOriginal", "2024:03:14 08:42:31", false]],
+    },
+  ] as const;
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20">
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <div className="flex flex-col justify-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
-            <span className="h-1.5 w-1.5 rounded-full bg-destructive" />
-            {t("revealBadge")}
+    <section className="border-y border-border bg-card/30">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:gap-16">
+          <div className="flex flex-col justify-center">
+            <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-border bg-card px-3 py-1 font-mono text-xs text-muted-foreground">
+              <span className="h-1.5 w-1.5 rounded-full bg-destructive" />
+              {t("revealBadge")}
+            </div>
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              {t("revealHeading")}
+            </h2>
+            <p className="mt-4 text-muted-foreground">{t("revealSubtext")}</p>
+            <div className="mt-6">
+              <a href="#download" className={`${primaryBtn} px-4 py-2`}>
+                <Download className="h-4 w-4" />
+                {t("revealCta")}
+              </a>
+            </div>
           </div>
-          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            {t("revealHeading")}
-          </h2>
-          <p className="mt-4 text-muted-foreground">{t("revealSubtext")}</p>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <a
-              href="#download"
-              className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-            >
-              <Download className="h-4 w-4" />
-              {t("revealCta")}
-            </a>
-          </div>
-        </div>
 
-        <div className="rounded-xl border border-border bg-card overflow-hidden">
-          <div className="flex items-center gap-1.5 border-b border-border px-4 py-3">
-            <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
-            <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
-            <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
-            <span className="ml-3 font-mono text-xs text-muted-foreground">
-              {t("revealFileLabel")}
-            </span>
-          </div>
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-border">
-                <th className="px-4 py-2 text-left font-mono text-xs text-muted-foreground">
-                  {t("revealTagCol")}
-                </th>
-                <th className="px-4 py-2 text-left font-mono text-xs text-muted-foreground">
-                  {t("revealValueCol")}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.map((r) => (
-                <tr
-                  key={r.tag}
-                  className={`border-b border-border/50 ${
-                    r.sensitive ? "bg-destructive/5" : ""
-                  }`}
-                >
-                  <td className="px-4 py-2 font-mono text-xs text-muted-foreground">
-                    {r.tag}
-                  </td>
-                  <td
-                    className={`px-4 py-2 font-mono text-xs ${
-                      r.sensitive ? "text-destructive" : "text-foreground"
-                    }`}
-                  >
-                    {r.value}
-                    {r.sensitive && (
-                      <span className="ml-2 rounded bg-destructive/15 px-1 py-0.5 text-[10px] text-destructive">
-                        {t("revealSensitiveLabel")}
-                      </span>
-                    )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="flex items-center justify-between bg-destructive/10 px-4 py-3">
-            <span className="font-mono text-xs text-destructive">
-              {t("revealSensitiveCount")}
-            </span>
-            <button className="inline-flex items-center gap-1.5 rounded bg-destructive px-3 py-1.5 font-mono text-xs text-white hover:bg-destructive/90 transition-colors">
-              <Eraser className="h-3 w-3" />
-              {t("revealStripAll")}
-            </button>
+          <div className="overflow-hidden rounded-xl border border-border bg-card">
+            <div className="flex items-center gap-2 border-b border-border px-4 py-3">
+              <span className="font-mono text-sm font-semibold">{t("revealFileLabel")}</span>
+              <span className="rounded-full bg-destructive/15 px-2 py-0.5 text-[11px] font-semibold text-destructive">
+                {t("revealRiskHigh")}
+              </span>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[420px] text-sm">
+                <thead>
+                  <tr className="border-b border-border text-left font-mono text-[11px] text-muted-foreground">
+                    <th className="px-4 py-2 font-medium">{t("revealTagCol")}</th>
+                    <th className="px-4 py-2 font-medium">{t("revealValueCol")}</th>
+                    <th className="px-4 py-2 font-medium">{t("revealActionCol")}</th>
+                  </tr>
+                </thead>
+                {groups.map((g) => (
+                  <tbody key={g.label}>
+                    <tr className="border-t border-border/60">
+                      <th colSpan={3} className="px-4 pt-2.5 pb-1 text-left text-xs font-semibold">
+                        <span className="inline-flex items-center gap-2">
+                          <g.icon className="h-3.5 w-3.5 text-primary" strokeWidth={2} />
+                          {g.label}
+                        </span>
+                      </th>
+                    </tr>
+                    {g.rows.map(([tag, value, removed]) => (
+                      <tr key={tag}>
+                        <td className="py-1 pr-4 pl-9 font-mono text-xs text-muted-foreground">
+                          {tag}
+                        </td>
+                        <td
+                          className={`px-4 py-1 font-mono text-xs ${
+                            removed ? "text-muted-foreground line-through" : "text-foreground"
+                          }`}
+                        >
+                          {value}
+                        </td>
+                        <td
+                          className={`px-4 py-1 text-xs ${removed ? "text-destructive" : "text-muted-foreground"}`}
+                        >
+                          {removed ? t("revealRemove") : t("revealKeep")}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                ))}
+              </table>
+            </div>
+            <div className="mt-2 flex flex-wrap items-center justify-between gap-3 border-t border-border px-4 py-3">
+              <span className="text-xs text-muted-foreground">{t("revealSummary")}</span>
+              <span className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground">
+                <CleanIcon className="h-3.5 w-3.5" />
+                {t("revealClean")}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -350,29 +365,59 @@ function HowItWorks() {
   const steps = [
     { icon: FolderOpen, step: "01", title: t("howStep1Title"), desc: t("howStep1Desc") },
     { icon: Eye, step: "02", title: t("howStep2Title"), desc: t("howStep2Desc") },
-    { icon: Trash2, step: "03", title: t("howStep3Title"), desc: t("howStep3Desc") },
+    { icon: CleanIcon, step: "03", title: t("howStep3Title"), desc: t("howStep3Desc") },
+  ];
+  return (
+    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{t("howHeading")}</h2>
+      <ol className="mt-12 grid gap-8 sm:grid-cols-3">
+        {steps.map((s) => (
+          <li key={s.step} className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs text-muted-foreground">{s.step}</span>
+              <div className="h-px flex-1 bg-border" />
+            </div>
+            <s.icon className="h-6 w-6 text-primary" strokeWidth={2} />
+            <div>
+              <h3 className="font-semibold">{s.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+// ── Gallery ───────────────────────────────────────────────────────────────────
+
+function Gallery() {
+  const t = useT();
+  const shots = [
+    { src: workspaceLight, caption: t("galleryLight"), alt: t("galleryLightAlt") },
+    { src: workspaceFr, caption: t("galleryFrench"), alt: t("galleryFrenchAlt") },
+    { src: settingsDark, caption: t("gallerySettings"), alt: t("gallerySettingsAlt") },
   ];
   return (
     <section className="border-y border-border bg-card/30">
-      <div className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          {t("howHeading")}
-        </h2>
-        <div className="mt-12 grid gap-8 sm:grid-cols-3">
-          {steps.map((s) => (
-            <div key={s.step} className="flex flex-col gap-4">
-              <div className="flex items-center gap-3">
-                <span className="font-mono text-xs text-muted-foreground">
-                  {s.step}
-                </span>
-                <div className="h-px flex-1 bg-border" />
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{t("galleryHeading")}</h2>
+        <p className="mt-3 text-muted-foreground">{t("gallerySubtext")}</p>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {shots.map((s) => (
+            <figure key={s.caption}>
+              <div className="overflow-hidden rounded-lg border border-border bg-card">
+                <img
+                  src={s.src}
+                  alt={s.alt}
+                  width={1280}
+                  height={800}
+                  loading="lazy"
+                  className="block h-auto w-full"
+                />
               </div>
-              <s.icon className="h-6 w-6 text-primary" strokeWidth={2} />
-              <div>
-                <h3 className="font-semibold">{s.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
-              </div>
-            </div>
+              <figcaption className="mt-3 text-sm text-muted-foreground">{s.caption}</figcaption>
+            </figure>
           ))}
         </div>
       </div>
@@ -380,71 +425,87 @@ function HowItWorks() {
   );
 }
 
-// ── ExifToolCallout ───────────────────────────────────────────────────────────
+// ── Formats ───────────────────────────────────────────────────────────────────
 
-function ExifToolCallout() {
+function Formats() {
   const t = useT();
+  const formatGroups = [
+    {
+      icon: ImageIcon,
+      label: t("formatImages"),
+      items: ["JPEG", "PNG", "TIFF", "WebP", "GIF", "HEIC"],
+    },
+    {
+      icon: Music,
+      label: t("formatAudio"),
+      items: ["MP3", "FLAC", "OGG", "Opus", "WAV", "AIFF", "M4A", "WMA", "APE", "WavPack"],
+    },
+    { icon: Video, label: t("formatVideo"), items: ["MP4", "M4V", "MOV", "MKV", "WebM"] },
+    { icon: FileText, label: t("formatDocuments"), items: ["PDF", "DOCX", "XLSX", "PPTX"] },
+  ];
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20">
-      <div className="grid gap-10 rounded-xl border border-border bg-card p-8 lg:grid-cols-2 lg:p-12">
+    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">{t("formatsHeading")}</h2>
+      <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {formatGroups.map((g) => (
+          <div key={g.label}>
+            <div className="flex items-center gap-2 text-foreground">
+              <g.icon className="h-4 w-4 text-primary" strokeWidth={2} />
+              <h3 className="text-sm font-medium">{g.label}</h3>
+            </div>
+            <ul className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-2 font-mono text-sm">
+              {g.items.map((it, i) => (
+                <li key={it} className="flex items-center gap-2">
+                  <span className="text-foreground">{it}</span>
+                  {i < g.items.length - 1 && (
+                    <span className="h-1 w-1 rounded-full bg-primary" aria-hidden="true" />
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <p className="mt-10 text-sm text-muted-foreground">{t("formatsNote")}</p>
+    </section>
+  );
+}
+
+// ── Command line ──────────────────────────────────────────────────────────────
+
+function CommandLine() {
+  const t = useT();
+  const lines: [string, string][] = [
+    ["eom risk ~/Pictures -r", t("cliComment1")],
+    ["eom clean ~/Pictures -r --profile social --output-dir ~/clean", t("cliComment2")],
+    ["eom extract ~/Documents -r -o report.html", t("cliComment3")],
+    ["eom edit photo.jpg --shift +2h", t("cliComment4")],
+  ];
+  return (
+    <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6">
+      <div className="grid gap-10 rounded-xl border border-border bg-card p-6 sm:p-8 lg:grid-cols-[1fr_1.6fr] lg:p-12">
         <div>
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-xs text-muted-foreground">
-            {t("exifBadge")}
+            <Terminal className="h-3.5 w-3.5" />
+            {t("cliBadge")}
           </div>
-          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-            {t("exifHeading")}
-          </h2>
-          <p className="mt-4 text-muted-foreground">{t("exifDesc1")}</p>
-          <p className="mt-3 text-muted-foreground">
-            {t("exifDesc2").split("exiftool.exe")[0]}
-            <code className="rounded bg-background px-1.5 py-0.5 text-foreground">
-              exiftool.exe
-            </code>
-            {t("exifDesc2").split("exiftool.exe")[1]}
-          </p>
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t("cliHeading")}</h2>
+          <p className="mt-4 text-muted-foreground">{t("cliDesc")}</p>
         </div>
-
-        <div className="flex flex-col justify-center gap-4">
-          <div className="rounded-md border border-border bg-background p-4">
-            <div className="mb-3 font-mono text-xs text-muted-foreground">
-              header · {t("exifDetected")}
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <img
-                  src="/app-logo.ico"
-                  alt="EOM logo"
-                  className="h-5 w-5 object-contain"
-                />
-                <span className="font-mono text-sm">EOM</span>
-              </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-success/15 px-3 py-1 font-mono text-xs text-success">
-                <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                ExifTool ✓
+        <pre className="overflow-x-auto rounded-md border border-border bg-background p-4 font-mono text-xs leading-6 sm:text-[13px]">
+          <code>
+            {lines.map(([cmd, comment], i) => (
+              <span key={cmd}>
+                {i > 0 && "\n"}
+                <span className="text-muted-foreground"># {comment}</span>
+                {"\n"}
+                <span className="text-primary select-none">$ </span>
+                {cmd}
+                {"\n"}
               </span>
-            </div>
-          </div>
-
-          <div className="rounded-md border border-border bg-background p-4">
-            <div className="mb-3 font-mono text-xs text-muted-foreground">
-              header · {t("exifNotFound")}
-            </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <img
-                  src="/app-logo.ico"
-                  alt="EOM logo"
-                  className="h-5 w-5 object-contain"
-                />
-                <span className="font-mono text-sm">EOM</span>
-              </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-warning/15 px-3 py-1 font-mono text-xs text-warning">
-                <span className="h-1.5 w-1.5 rounded-full bg-warning" />
-                ExifTool ✗
-              </span>
-            </div>
-          </div>
-        </div>
+            ))}
+          </code>
+        </pre>
       </div>
     </section>
   );
@@ -454,76 +515,124 @@ function ExifToolCallout() {
 
 function PrivacyBanner() {
   const t = useT();
-  const rows: [string, boolean, boolean][] = [
-    [t("tableRow1"), false, true],
-    [t("tableRow2"), false, true],
-    [t("tableRow3"), false, true],
-    [t("tableRow4"), false, true],
-    [t("tableRow5"), false, true],
-    [t("tableRow6"), false, true],
+  const cards = [
+    { icon: WifiOff, title: t("privacyCard1Title"), desc: t("privacyCard1Desc") },
+    { icon: ShieldCheck, title: t("privacyCard2Title"), desc: t("privacyCard2Desc") },
+    { icon: Lock, title: t("privacyCard3Title"), desc: t("privacyCard3Desc") },
+  ];
+  // Online tools never run locally or offline; account, price and licence vary.
+  const rows: [string, boolean][] = [
+    [t("tableRow1"), false],
+    [t("tableRow2"), false],
+    [t("tableRow3"), true],
+    [t("tableRow4"), true],
+    [t("tableRow5"), true],
   ];
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20">
-      <div className="mb-10">
-        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-          {t("privacyHeading")}
-        </h2>
-        <p className="mt-3 max-w-2xl text-muted-foreground">
-          {t("privacySubtext")}
-        </p>
-      </div>
-      <div className="grid gap-4 sm:grid-cols-3">
-        <div className="rounded-lg border border-border bg-card p-6">
-          <WifiOff className="h-6 w-6 text-primary" strokeWidth={2} />
-          <h3 className="mt-4 font-semibold">{t("privacyCard1Title")}</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {t("privacyCard1Desc")}
-          </p>
+    <section className="border-y border-border bg-card/30">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+        <div className="mb-10">
+          <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+            {t("privacyHeading")}
+          </h2>
+          <p className="mt-3 max-w-2xl text-muted-foreground">{t("privacySubtext")}</p>
         </div>
-        <div className="rounded-lg border border-border bg-card p-6">
-          <ShieldCheck className="h-6 w-6 text-primary" strokeWidth={2} />
-          <h3 className="mt-4 font-semibold">{t("privacyCard2Title")}</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {t("privacyCard2Desc")}
-          </p>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {cards.map((c) => (
+            <div key={c.title} className="rounded-lg border border-border bg-card p-6">
+              <c.icon className="h-6 w-6 text-primary" strokeWidth={2} />
+              <h3 className="mt-4 font-semibold">{c.title}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
+            </div>
+          ))}
         </div>
-        <div className="rounded-lg border border-border bg-card p-6">
-          <Lock className="h-6 w-6 text-primary" strokeWidth={2} />
-          <h3 className="mt-4 font-semibold">{t("privacyCard3Title")}</h3>
-          <p className="mt-2 text-sm text-muted-foreground">
-            {t("privacyCard3Desc")}
-          </p>
-        </div>
-      </div>
 
-      <div className="mt-10 overflow-hidden rounded-xl border border-border">
-        <div className="grid grid-cols-3 bg-card px-6 py-3 text-xs font-medium text-muted-foreground">
-          <span />
-          <span className="text-center">{t("tableColOnline")}</span>
-          <span className="text-center">{t("tableColEom")}</span>
-        </div>
-        {rows.map(([label, online, eom]) => (
-          <div
-            key={label}
-            className="grid grid-cols-3 border-t border-border px-6 py-3 text-sm"
-          >
-            <span className="text-muted-foreground">{label}</span>
-            <span className="text-center">
-              {online ? (
-                <span className="text-success">✓</span>
-              ) : (
-                <span className="text-destructive">✗</span>
-              )}
-            </span>
-            <span className="text-center">
-              {eom ? (
-                <span className="text-success">✓</span>
-              ) : (
-                <span className="text-destructive">✗</span>
-              )}
-            </span>
+        <table className="mt-10 w-full overflow-hidden rounded-xl border border-border text-sm">
+          <thead className="bg-card text-xs text-muted-foreground">
+            <tr>
+              <th className="px-4 py-3 text-left font-medium sm:px-6">
+                <span className="sr-only">—</span>
+              </th>
+              <th className="px-4 py-3 text-center font-medium">{t("tableColOnline")}</th>
+              <th className="px-4 py-3 text-center font-medium">{t("tableColEom")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(([label, varies]) => (
+              <tr key={label} className="border-t border-border">
+                <th
+                  scope="row"
+                  className="px-4 py-3 text-left font-normal text-muted-foreground sm:px-6"
+                >
+                  {label}
+                </th>
+                {varies ? (
+                  <td className="px-4 py-3 text-center text-xs text-muted-foreground">
+                    {t("tableVaries")}
+                  </td>
+                ) : (
+                  <td className="px-4 py-3 text-center text-destructive" aria-label="no">
+                    ✗
+                  </td>
+                )}
+                <td className="px-4 py-3 text-center text-success" aria-label="yes">
+                  ✓
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  );
+}
+
+// ── ExifToolCallout ───────────────────────────────────────────────────────────
+
+function ExifToolCallout() {
+  const t = useT();
+  const states = [
+    { caption: t("exifDetected"), chip: t("exifOn"), tone: "success" },
+    { caption: t("exifNotFound"), chip: t("exifOff"), tone: "warning" },
+  ] as const;
+  return (
+    <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+      <div className="grid gap-10 rounded-xl border border-border bg-card p-6 sm:p-8 lg:grid-cols-2 lg:p-12">
+        <div>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border px-3 py-1 font-mono text-xs text-muted-foreground">
+            {t("exifBadge")}
           </div>
-        ))}
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">{t("exifHeading")}</h2>
+          <p className="mt-4 text-muted-foreground">{t("exifDesc1")}</p>
+          <p className="mt-3 text-muted-foreground">
+            <WithCode text={t("exifDesc2")} />
+          </p>
+        </div>
+
+        <div className="flex flex-col justify-center gap-4">
+          {states.map((s) => (
+            <div key={s.chip} className="rounded-md border border-border bg-background p-4">
+              <div className="mb-3 font-mono text-xs text-muted-foreground">
+                ExifTool · {s.caption}
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <img src={asset("/app-logo.ico")} alt="" className="h-5 w-5 object-contain" />
+                  <span className="text-sm font-semibold text-primary">Eye On Metadata</span>
+                </div>
+                <span
+                  className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${
+                    s.tone === "success"
+                      ? "bg-success/15 text-success"
+                      : "bg-warning/15 text-warning"
+                  }`}
+                >
+                  {s.chip}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -531,41 +640,23 @@ function PrivacyBanner() {
 
 // ── DownloadSection ───────────────────────────────────────────────────────────
 
-const BASE = "https://github.com/abogo-nono/eom/releases/download/v2.0.0 ";
-
 function DownloadSection() {
   const t = useT();
   const downloads = [
-    {
-      icon: LinuxIcon,
-      os: "Linux x86-64",
-      note: t("dlLinuxNote"),
-      file: "eom-linux-x86_64.zip",
-      href: `${BASE}/eom-linux-x86_64.zip`,
-    },
-    {
-      icon: WindowsIcon,
-      os: "Windows x86-64",
-      note: t("dlWindowsNote"),
-      file: "eom-windows-x86_64.zip",
-      href: `${BASE}/eom-windows-x86_64.zip`,
-    },
-    {
-      icon: Apple,
-      os: "macOS Apple Silicon",
-      note: t("dlMacNote"),
-      file: "eom-macos-arm64.zip",
-      href: `${BASE}/eom-macos-arm64.zip`,
-    },
+    { icon: WindowsIcon, os: "Windows x86-64", note: t("dlWindowsNote"), href: DOWNLOADS.windows },
+    { icon: Apple, os: "macOS Apple Silicon", note: t("dlMacNote"), href: DOWNLOADS.macos },
+    { icon: LinuxIcon, os: "Linux x86-64", note: t("dlLinuxNote"), href: DOWNLOADS.linux },
   ];
   return (
-    <section id="download" className="border-t border-border">
-      <div className="mx-auto max-w-6xl px-6 py-20">
+    <section id="download" className="scroll-mt-16 border-t border-border">
+      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="max-w-2xl">
           <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
             {t("downloadHeading")}
           </h2>
-          <p className="mt-3 text-muted-foreground">{t("downloadSubtext")}</p>
+          <p className="mt-3 text-muted-foreground">
+            EOM {APP_VERSION} · {t("downloadSubtext")}
+          </p>
         </div>
 
         <div className="mt-10 overflow-hidden rounded-xl border border-border">
@@ -583,23 +674,33 @@ function DownloadSection() {
                 <div>
                   <div className="text-sm font-medium">{d.os}</div>
                   <div className="mt-0.5 font-mono text-xs text-muted-foreground">
-                    {d.file}
+                    {d.href.split("/").pop()}
                   </div>
-                  <div className="mt-1 text-xs text-muted-foreground">
-                    {d.note}
-                  </div>
+                  <div className="mt-1 text-xs text-muted-foreground">{d.note}</div>
                 </div>
               </div>
-              <a
-                href={d.href}
-                download
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
-              >
+              <a href={d.href} className={`${primaryBtn} shrink-0 px-4 py-2`}>
                 <Download className="h-4 w-4" />
                 {t("downloadBtn")}
               </a>
             </div>
           ))}
+        </div>
+
+        <div className="mt-6 flex flex-col gap-2 text-xs text-muted-foreground">
+          <p>
+            <WithCode text={t("dlHelpLinux")} />
+          </p>
+          <p>
+            <WithCode text={t("dlHelpMac")} />
+          </p>
+          <a
+            href={LATEST_RELEASE_URL}
+            className="mt-2 inline-flex w-fit items-center gap-1.5 text-sm text-primary hover:underline"
+          >
+            {t("dlReleaseNotes")}
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
         </div>
       </div>
     </section>
@@ -612,14 +713,15 @@ function Footer() {
   const t = useT();
   return (
     <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-6 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center">
+      <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-4 px-4 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:px-6">
         <div>
           {t("footerBuiltBy")} —{" "}
-          <a
-            href="https://github.com/abogo-nono"
-            className="text-foreground hover:text-primary transition-colors"
-          >
+          <a href={AUTHOR_URL} className="text-foreground hover:text-primary transition-colors">
             github.com/abogo-nono
+          </a>
+          {" · "}
+          <a href={REPO_URL} className="text-foreground hover:text-primary transition-colors">
+            {t("navGithub")}
           </a>
         </div>
         <div className="flex items-center gap-4">
@@ -639,10 +741,12 @@ export function LandingPage() {
       <Navbar />
       <main>
         <Hero />
-        <FeatureStrip />
+        <Features />
         <MetadataReveal />
         <HowItWorks />
+        <Gallery />
         <Formats />
+        <CommandLine />
         <PrivacyBanner />
         <ExifToolCallout />
         <DownloadSection />

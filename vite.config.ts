@@ -6,13 +6,17 @@ import tsconfigPaths from "vite-tsconfig-paths";
 const isGitHubPages = process.env.GITHUB_PAGES === "true";
 
 export default defineConfig({
-  base: isGitHubPages ? "/eom/" : "/",
+  // GitHub Pages serves the site under /<repo>/; Vercel and local dev under /.
+  base: isGitHubPages ? "/eom-eye-on-metadata/" : "/",
   plugins: [
     tanstackStart({
+      // Only the two pages are prerendered. Following links would also fetch
+      // linked images and rewrite them as text, corrupting the PNGs.
       prerender: {
         enabled: true,
-        routes: ["/", "/fr/"],
+        crawlLinks: false,
       },
+      pages: [{ path: "/" }, { path: "/fr/" }],
     }),
     tailwindcss(),
     tsconfigPaths(),

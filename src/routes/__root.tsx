@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { useLocale, useT } from "@/i18n/useLocale";
 
 import appCss from "../styles.css?url";
+import { asset } from "@/site";
 
 function NotFoundComponent() {
   const t = useT();
@@ -10,9 +11,7 @@ function NotFoundComponent() {
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-xl font-semibold text-foreground">{t("notFoundTitle")}</h2>
-        <p className="mt-2 text-sm text-muted-foreground">
-          {t("notFoundDesc")}
-        </p>
+        <p className="mt-2 text-sm text-muted-foreground">{t("notFoundDesc")}</p>
         <div className="mt-6">
           <Link
             to="/"
@@ -38,10 +37,7 @@ export const Route = createRootRoute({
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/app-logo.ico" },
-      { rel: "alternate", hrefLang: "en", href: "https://abogo-nono.github.io/eom/" },
-      { rel: "alternate", hrefLang: "fr", href: "https://abogo-nono.github.io/eom/fr/" },
-      { rel: "alternate", hrefLang: "x-default", href: "https://abogo-nono.github.io/eom/" },
+      { rel: "icon", href: asset("/app-logo.ico") },
     ],
   }),
   shellComponent: RootShell,

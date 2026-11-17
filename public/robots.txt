@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://abogo-nono.github.io/eom/sitemap.xml
+Sitemap: https://abogo-nono.github.io/eom-eye-on-metadata/sitemap.xml

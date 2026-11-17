@@ -231,7 +231,7 @@ export function Checker({ compact = false }: { compact?: boolean }) {
             )}
             <p className="max-w-xl text-ink">{state.kind === "empty" ? t.nothing : t.error}</p>
           </div>
-          <button type="button" onClick={reset} className="btn-line mt-8 text-ink">
+          <button type="button" onClick={reset} className="btn-line btn-line-ink mt-8">
             {t.another}
           </button>
         </div>
@@ -406,7 +406,7 @@ function Result({
           </a>
           <p className="mt-2 max-w-md text-sm text-ink-soft">{t.ctaNote}</p>
         </div>
-        <button type="button" onClick={onReset} className="btn-line text-ink">
+        <button type="button" onClick={onReset} className="btn-line btn-line-ink">
           {t.another}
         </button>
       </div>

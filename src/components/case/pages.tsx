@@ -293,7 +293,7 @@ export function GuidePage({ guideKey }: { guideKey: GuideKey }) {
               <a href={`${asset(pagePath("home", locale))}#download`} className="btn-ink">
                 {ui.shell.nav.download} EOM
               </a>
-              <a href={asset(pagePath("check", locale))} className="btn-line text-bone">
+              <a href={asset(pagePath("check", locale))} className="btn-line">
                 {t.ctaCheck} →
               </a>
             </div>

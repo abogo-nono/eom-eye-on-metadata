@@ -223,7 +223,7 @@ function Hero() {
             <a href="#download" className="btn-ink">
               <DownloadIcon /> {h.heroCta}
             </a>
-            <a href={asset(pagePath("check", locale))} className="btn-line text-bone">
+            <a href={asset(pagePath("check", locale))} className="btn-line">
               {h.heroCta2} →
             </a>
           </div>
@@ -632,7 +632,7 @@ function CaseNotes() {
             <h2 className="display mt-4 text-5xl uppercase sm:text-6xl">{h.guidesHeading}</h2>
             <p className="mt-4 max-w-lg text-dust">{h.guidesSub}</p>
           </div>
-          <a href={asset(pagePath("guides", locale))} className="btn-line text-bone">
+          <a href={asset(pagePath("guides", locale))} className="btn-line">
             {ui.shell.allGuides} →
           </a>
         </div>

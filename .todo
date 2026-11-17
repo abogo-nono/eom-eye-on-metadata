@@ -1,0 +1,6 @@
+Website:
+  ☐ Review the boldest copy, in both languages (src/i18n/ui.ts):
+    - home hero: "Every photo you share testifies against you." / "Chaque photo que vous partagez témoigne contre vous."
+    - privacy section: "We can't see your files. Not 'won't'. Can't." / "Nous ne pouvons pas voir vos fichiers. Pas « ne voulons pas ». Ne pouvons pas."
+  ☐ Google Search Console: add the property https://abogo-nono.github.io/eom-eye-on-metadata/, verify it (HTML tag in src/routes/__root.tsx or a file in public/), then submit /sitemap.xml
+  ☐ Bing Webmaster Tools: import the site from Search Console (or add it by hand) and submit /sitemap.xml

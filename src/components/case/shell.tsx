@@ -280,7 +280,7 @@ export function Footer() {
           </a>
           <p className="mt-4 max-w-sm text-sm text-dust">{ui.shell.footerTagline}</p>
           <p className="mt-3 max-w-sm text-sm text-dust">{ui.shell.footerSite}</p>
-          <p className="typewriter mt-5 text-xs text-dust/70">
+          <p className="typewriter mt-5 text-xs text-dust">
             v{APP_VERSION} · MIT ·{" "}
             <a className="link-marker" href={AUTHOR_URL}>
               {ui.shell.footerAuthor}

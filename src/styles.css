@@ -281,13 +281,17 @@
     box-shadow: 1px 1px 0 var(--redact);
   }
 
+  /* Outline button. Colours live here, not in text-* utilities: a utility
+     would beat the :hover rule and leave light text on a light fill. */
   .btn-line {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     padding: 0.9rem 1.2rem 0.8rem;
-    border: 1.5px solid currentColor;
+    border: 1.5px solid var(--bone);
+    color: var(--bone);
+    background: transparent;
     font-family: var(--font-mono);
     font-weight: 700;
     font-size: 0.95rem;
@@ -296,9 +300,22 @@
       color 0.15s ease;
   }
 
-  .btn-line:hover {
+  .btn-line:hover,
+  .btn-line:focus-visible {
     background: var(--bone);
     color: var(--ink);
+  }
+
+  /* Same button on a paper sheet */
+  .btn-line-ink {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
+  .btn-line-ink:hover,
+  .btn-line-ink:focus-visible {
+    background: var(--ink);
+    color: var(--paper);
   }
 
   .link-marker {

@@ -1,8 +1,10 @@
 name: Deploy to GitHub Pages
 
+# Manual only for now: GitHub Pages is unavailable while this repository is
+# private. Once it is public, restore the push trigger:
+#   push:
+#     branches: [master]
 on:
-  push:
-    branches: [master]
   workflow_dispatch:
 
 permissions:

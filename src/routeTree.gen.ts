@@ -10,11 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CheckIndexRouteImport } from './routes/check/index'
 import { Route as FrIndexRouteImport } from './routes/fr/index'
+import { Route as GuidesIndexRouteImport } from './routes/guides/index'
+import { Route as FrGuidesIndexRouteImport } from './routes/fr/guides/index'
+import { Route as FrVerifierIndexRouteImport } from './routes/fr/verifier/index'
+import { Route as GuidesSlugIndexRouteImport } from './routes/guides/$slug/index'
+import { Route as FrGuidesSlugIndexRouteImport } from './routes/fr/guides/$slug/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckIndexRoute = CheckIndexRouteImport.update({
+  id: '/check/',
+  path: '/check/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FrIndexRoute = FrIndexRouteImport.update({
@@ -22,31 +33,105 @@ const FrIndexRoute = FrIndexRouteImport.update({
   path: '/fr/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrGuidesIndexRoute = FrGuidesIndexRouteImport.update({
+  id: '/fr/guides/',
+  path: '/fr/guides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrVerifierIndexRoute = FrVerifierIndexRouteImport.update({
+  id: '/fr/verifier/',
+  path: '/fr/verifier/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesSlugIndexRoute = GuidesSlugIndexRouteImport.update({
+  id: '/guides/$slug/',
+  path: '/guides/$slug/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrGuidesSlugIndexRoute = FrGuidesSlugIndexRouteImport.update({
+  id: '/fr/guides/$slug/',
+  path: '/fr/guides/$slug/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/check/': typeof CheckIndexRoute
   '/fr/': typeof FrIndexRoute
+  '/guides/': typeof GuidesIndexRoute
+  '/fr/guides/': typeof FrGuidesIndexRoute
+  '/fr/verifier/': typeof FrVerifierIndexRoute
+  '/guides/$slug/': typeof GuidesSlugIndexRoute
+  '/fr/guides/$slug/': typeof FrGuidesSlugIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/check': typeof CheckIndexRoute
   '/fr': typeof FrIndexRoute
+  '/guides': typeof GuidesIndexRoute
+  '/fr/guides': typeof FrGuidesIndexRoute
+  '/fr/verifier': typeof FrVerifierIndexRoute
+  '/guides/$slug': typeof GuidesSlugIndexRoute
+  '/fr/guides/$slug': typeof FrGuidesSlugIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/check/': typeof CheckIndexRoute
   '/fr/': typeof FrIndexRoute
+  '/guides/': typeof GuidesIndexRoute
+  '/fr/guides/': typeof FrGuidesIndexRoute
+  '/fr/verifier/': typeof FrVerifierIndexRoute
+  '/guides/$slug/': typeof GuidesSlugIndexRoute
+  '/fr/guides/$slug/': typeof FrGuidesSlugIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/fr/'
+  fullPaths:
+    | '/'
+    | '/check/'
+    | '/fr/'
+    | '/guides/'
+    | '/fr/guides/'
+    | '/fr/verifier/'
+    | '/guides/$slug/'
+    | '/fr/guides/$slug/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/fr'
-  id: '__root__' | '/' | '/fr/'
+  to:
+    | '/'
+    | '/check'
+    | '/fr'
+    | '/guides'
+    | '/fr/guides'
+    | '/fr/verifier'
+    | '/guides/$slug'
+    | '/fr/guides/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/check/'
+    | '/fr/'
+    | '/guides/'
+    | '/fr/guides/'
+    | '/fr/verifier/'
+    | '/guides/$slug/'
+    | '/fr/guides/$slug/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CheckIndexRoute: typeof CheckIndexRoute
   FrIndexRoute: typeof FrIndexRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
+  FrGuidesIndexRoute: typeof FrGuidesIndexRoute
+  FrVerifierIndexRoute: typeof FrVerifierIndexRoute
+  GuidesSlugIndexRoute: typeof GuidesSlugIndexRoute
+  FrGuidesSlugIndexRoute: typeof FrGuidesSlugIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +143,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/check/': {
+      id: '/check/'
+      path: '/check'
+      fullPath: '/check/'
+      preLoaderRoute: typeof CheckIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/fr/': {
       id: '/fr/'
       path: '/fr'
@@ -65,12 +157,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FrIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/guides/': {
+      id: '/guides/'
+      path: '/guides'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/guides/': {
+      id: '/fr/guides/'
+      path: '/fr/guides'
+      fullPath: '/fr/guides/'
+      preLoaderRoute: typeof FrGuidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/verifier/': {
+      id: '/fr/verifier/'
+      path: '/fr/verifier'
+      fullPath: '/fr/verifier/'
+      preLoaderRoute: typeof FrVerifierIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/$slug/': {
+      id: '/guides/$slug/'
+      path: '/guides/$slug'
+      fullPath: '/guides/$slug/'
+      preLoaderRoute: typeof GuidesSlugIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fr/guides/$slug/': {
+      id: '/fr/guides/$slug/'
+      path: '/fr/guides/$slug'
+      fullPath: '/fr/guides/$slug/'
+      preLoaderRoute: typeof FrGuidesSlugIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CheckIndexRoute: CheckIndexRoute,
   FrIndexRoute: FrIndexRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
+  FrGuidesIndexRoute: FrGuidesIndexRoute,
+  FrVerifierIndexRoute: FrVerifierIndexRoute,
+  GuidesSlugIndexRoute: GuidesSlugIndexRoute,
+  FrGuidesSlugIndexRoute: FrGuidesSlugIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

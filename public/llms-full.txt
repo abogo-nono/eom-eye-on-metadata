@@ -1,0 +1,1255 @@
+# EOM — Eye On Metadata: full guides
+
+Source: https://abogo-nono.github.io/eom-eye-on-metadata/ · Updated 2026-11-17 · EOM 2.2.1
+
+# How to remove the GPS location from a photo
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-gps-location-from-photos/
+Language: en · Topic: photos
+
+**In short:** A photo's location lives in its EXIF GPS tags (GPSLatitude, GPSLongitude, GPSAltitude). To remove it: on Windows, open Properties › Details › Remove Properties and Personal Information. On a Mac, open the photo in Preview › Tools › Show Inspector › GPS › Remove Location Info. On iPhone, tap Options in the share sheet and turn off Location. On any system, for any number of files, drop them on EOM, choose the “Location only” profile and click Clean.
+
+## First, check whether the photo has a location
+
+Phones write the location into a photo whenever the camera app is allowed to use location services, which is the default on many phones. Cameras with built-in GPS or a phone connection do the same.
+
+The quickest check: drop the photo on our in-browser checker. It reads the file on your device and shows the coordinates if there are any. You can also look in Windows Explorer (Properties › Details, section GPS) or in Preview on a Mac (Tools › Show Inspector › the GPS tab).
+
+The position is usually accurate to a few metres. That's enough to point to a house, not just a street.
+
+## Remove the location on your computer
+
+**Windows (one photo or a few, JPEG/TIFF):**
+
+1. Right-click the photo and choose Properties.
+2. Open the Details tab and click **Remove Properties and Personal Information** at the bottom.
+3. Choose “Remove the following properties from this file”, tick the GPS fields (or click Select All), then OK.
+
+**Mac (one photo at a time):**
+
+1. Open the photo in Preview.
+2. Choose Tools › Show Inspector, then the GPS tab.
+3. Click **Remove Location Info** and save.
+
+**Linux, or any system with ExifTool:** `exiftool -gps:all= photo.jpg` deletes the GPS block and keeps a backup named `photo.jpg_original`.
+
+> A location can also be stored outside the GPS block: in XMP, and as place names (City, Country, Sub-location) in IPTC. Built-in system tools often miss those. EOM's “Location only” profile removes all of them.
+
+## Remove it from a whole folder at once
+
+The system tools above work file by file. For a holiday folder, a shoot or a phone backup, use EOM:
+
+1. Download EOM (free, no installer) and open it.
+2. Drop the folder on the window. Every photo gets a risk rating.
+3. Choose the **Location only** profile. The preview shows exactly which tags will go.
+4. Tick **Copies in** to keep the originals untouched, then click **Clean**.
+5. Open Before / after on any file to confirm the GPS tags are gone.
+
+From a terminal, the same thing is one line:
+
+```
+eom clean ~/Pictures/holiday -r --profile location --output-dir ~/Pictures/holiday-clean
+```
+
+## Stop your phone from adding it
+
+**iPhone:** Settings › Privacy & Security › Location Services › Camera › **Never**. New photos won't be geotagged. Photos already taken keep their location.
+
+**Android:** open the Camera app, go to its settings and turn off the location option. It's called “Save location”, “Location tags” or similar, depending on the maker.
+
+Turning it off loses the map view in your gallery. If you like that view, keep location on and remove it only from the copies you share. See iPhone and Android photos.
+
+## Don't social networks remove it anyway?
+
+Large platforms generally strip EXIF data from the public copy of a photo. That protects you from other users, not from the platform, which receives the original file.
+
+Plenty of channels keep the original file, location included: email attachments, cloud share links, photos sent “as a file” or “as a document” in messaging apps, many forums and marketplaces, and files copied to a USB stick. Clean before you share, and you don't have to know the rules of each one.
+
+## FAQ
+
+### Does a screenshot contain a GPS location?
+
+Usually not. Screenshots don't record GPS. They can still carry the device model, the date and the software that took them.
+
+### Does removing the location reduce photo quality?
+
+No visible change. With ExifTool installed, EOM doesn't touch the image data at all. Without it, JPEGs are saved again with their original quality settings.
+
+### Can I remove the location but keep the date?
+
+Yes. EOM's “Location only” profile removes GPS coordinates and place names and keeps everything else, including dates.
+
+### Is the location also in the file name or the folder?
+
+Not in the photo file itself, but some apps name exported files or albums after a place. Check names before sharing too.
+
+---
+
+# Remove the location from iPhone and Android photos
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-location-from-iphone-android-photos/
+Language: en · Topic: photos
+
+**In short:** On iPhone, tap Share, then Options at the top of the share sheet, and turn off Location before you send. To stop recording it, go to Settings › Privacy & Security › Location Services › Camera and choose Never. On Android, turn off the location option in the camera app's settings. For photos already in your library, remove the location when sharing, or clean them on a computer with EOM.
+
+## Why your phone stores where each photo was taken
+
+Gallery apps use it for the map view and “memories”. To build them, the camera writes GPS coordinates into every photo, accurate to a few metres. Those coordinates go wherever the file goes.
+
+Most people never notice, because nothing on the picture shows it. Our photo checker shows it in a second.
+
+## iPhone: share a photo without its location
+
+1. Select the photo (or several) in Photos and tap **Share**.
+2. At the top of the share sheet, tap **Options**.
+3. Turn off **Location**, then tap Done and share as usual.
+
+This only affects the copy you send. The photo in your library keeps its location. The Options button also applies when you share by AirDrop, Messages or Mail.
+
+## iPhone: stop geotagging new photos
+
+Settings › Privacy & Security › Location Services › Camera › **Never**. From now on, new photos have no location. Existing photos are unchanged.
+
+iPhones save photos as HEIC by default. HEIC files carry the same EXIF data as JPEGs, location included.
+
+## Android
+
+Every maker ships its own camera app, so names differ, but the setting exists on all of them:
+
+- Open the **Camera** app and its settings (gear icon).
+- Turn off **Save location**, **Location tags** or the option with a similar name.
+- Or remove the camera's location permission in Settings › Apps › Camera › Permissions.
+
+Some gallery apps can remove the location when you share. Check the share options of yours. When in doubt, check the file you received with the checker.
+
+## Photos you already took
+
+Copy them to a computer, drop the folder on EOM and use the **Location only** or **Social media sharing** profile. Tick “Copies in” to keep the originals with their map data and share the clean copies.
+
+Videos recorded on a phone often carry a location too. See MP3, MP4 and video files.
+
+## FAQ
+
+### If I turn off Location in the share Options, is my library photo changed?
+
+No. Only the copy you send is stripped. The photo in your library keeps its location.
+
+### Does AirDrop send the location?
+
+AirDrop sends the original file, location included, unless you turn off Location in the share sheet's Options first.
+
+### Do messaging apps remove the location?
+
+It depends on the app and on how you send. A photo sent “as a file” or “as a document” is usually the original, with its metadata. Clean it first to be sure.
+
+---
+
+# What is EXIF data?
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-is-exif-data/
+Language: en · Topic: basics
+
+**In short:** EXIF (Exchangeable Image File Format) is a standard for storing information inside photo files. Cameras and phones use it to record the camera make and model, the shooting settings (exposure, aperture, ISO, focal length), the date and time, and often the GPS location and the camera's serial number. It's invisible in the image, but anyone who has the file can read it with free tools.
+
+## What an EXIF block contains
+
+A typical phone photo carries dozens of tags. The ones that matter for privacy:
+
+| Tag | Example | What it gives away |
+| --- | --- | --- |
+| GPSLatitude / GPSLongitude | 48° 51' 30" N, 2° 17' 40" E | Where you were, to a few metres |
+| DateTimeOriginal | 2024:03:14 08:42:31 | When, to the second |
+| Make / Model | Apple iPhone 15 Pro | What device you use |
+| BodySerialNumber | DNPXQ2M5… | Links every photo from the same camera |
+| Artist / Copyright | Jane Doe | Your name |
+| Software | 17.3.1 / Lightroom | Software and version |
+| ThumbnailImage | 160×120 JPEG | A preview that can survive crops and edits |
+
+The rest is technical: exposure, aperture, ISO, flash, white balance, orientation. Harmless on its own.
+
+## EXIF, XMP and IPTC: three places for the same kind of data
+
+**EXIF** dates from 1995 and is written by the camera. **XMP** is a newer format, written mostly by editing software such as Lightroom or Photoshop; it can hold the same fields and an editing history. **IPTC** comes from the press industry and holds captions, keywords, credits and place names.
+
+A clean-up that only touches EXIF can leave your name in XMP or your city in IPTC. EOM reads and removes all three.
+
+## Who can read it
+
+Anyone who has the file. Every operating system shows part of it in the file properties, and free tools show all of it. No password, no special skill.
+
+What matters is whether the file reaches people as the original. Large social networks usually strip EXIF from public copies. Email attachments, cloud links, photos sent as files and many websites don't. See what photo metadata reveals.
+
+## How to see a photo's EXIF data
+
+- In your browser, without uploading: our photo checker.
+- Windows: right-click › Properties › Details.
+- Mac: Preview › Tools › Show Inspector › the (i) tab, then EXIF and GPS.
+- Every tag, on any system: open the photo in EOM, or run `exiftool photo.jpg`.
+
+## How to remove it
+
+Removing EXIF doesn't change the picture. You can remove everything, or only what matters: the location, your name, the serial numbers. EOM's profiles do exactly that, and the guide remove the GPS location from a photo covers the built-in tools of each system.
+
+## FAQ
+
+### Is EXIF data the same as metadata?
+
+EXIF is one kind of metadata, specific to images. Photos can also carry XMP and IPTC metadata, and other files have their own: ID3 in MP3s, document properties in PDF and Office files.
+
+### Do PNG files have EXIF data?
+
+They can. PNG supports EXIF and text chunks, though many apps write less into PNGs than into JPEGs.
+
+### Does removing EXIF data change the photo?
+
+No. The pixels stay the same. Only the orientation tag can matter: if it's removed, a few viewers may show the photo rotated. EOM's profiles other than “Remove everything” keep technical tags like orientation.
+
+---
+
+# What your photo metadata reveals about you
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-photo-metadata-reveals/
+Language: en · Topic: basics
+
+**In short:** Photo metadata can reveal where you were (GPS coordinates accurate to a few metres), who you are (author and owner names), which device you use (make, model, serial numbers that link your photos together), when you were there (timestamps to the second) and how the file was edited. EOM classifies every tag into these categories and rates each file High, Medium, Low or Clean.
+
+## Six things a file can say about you
+
+**1. Where you were.** GPS latitude, longitude and altitude, plus place names (city, country). Several photos taken at home give away your address.
+
+**2. Who you are.** Author, artist, owner, copyright holder, the “last modified by” name of a document, the company your software is licensed to.
+
+**3. What links you.** Serial numbers of camera bodies and lenses, unique image and document IDs. They tie photos posted under different accounts to the same person.
+
+**4. What you own.** Make, model, lens, firmware.
+
+**5. When.** Capture time to the second, with time zone. Across many photos, that's a routine.
+
+**6. What happened to the file.** Software, editing history, and in documents, revision authors and total editing time.
+
+## A real case: found by a photo's GPS data
+
+In December 2012, John McAfee was being sought for questioning by police in Belize and was in hiding. Journalists from Vice published a photo of him. The photo still held its GPS coordinates, and readers placed him in Guatemala within hours. The location was meant to be secret. Nobody had checked the file.
+
+It's the classic case because it's so ordinary: one photo, no hacking, just a file that said more than its author meant it to.
+
+## Everyday situations where it matters
+
+- Selling something online from home: the listing photos can carry your address.
+- Sending a CV or a report as PDF or Word: author, company and past revisions travel with it.
+- Posting under a pseudonym: the camera serial number can link the account to your real one.
+- Sharing children's photos: location and routine.
+- Journalists and activists: sources, places and devices.
+
+## How EOM rates the risk
+
+EOM sorts every tag into a category, and each category has a severity:
+
+| Severity | Categories |
+| --- | --- |
+| High | Location, identity, unique IDs and serial numbers |
+| Medium | Device, dates, software and editing history, embedded thumbnails |
+| Low | Copyright and licence, other tags |
+| None | Technical tags (size, colour, exposure) |
+
+A file's rating is its most severe category. One GPS tag is enough to make a file High. You can test any photo with the in-browser checker, which uses the same rules.
+
+## FAQ
+
+### Can metadata reveal my home address?
+
+Yes. GPS coordinates in photos taken at home point to the building, often to within a few metres.
+
+### Can my photos be linked together even without my name?
+
+Yes. Camera body and lens serial numbers, and some unique image IDs, are the same across every photo from that device.
+
+### Is all metadata dangerous?
+
+No. Technical tags such as exposure, colour profile or orientation reveal nothing personal. That's why EOM can remove what matters and keep the rest.
+
+---
+
+# How to remove metadata from a PDF, properly
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-from-pdf/
+Language: en · Topic: documents
+
+**In short:** A PDF keeps metadata in two places: the document information dictionary (Title, Author, Subject, Keywords, Creator, Producer, dates) and an XMP metadata stream. Many tools edit these as an incremental update appended to the file, which leaves the old values recoverable. To remove PDF metadata properly, the file must be rewritten. EOM always rewrites PDFs; Adobe Acrobat Pro's Remove Hidden Information also works.
+
+## What a PDF reveals
+
+- **Author**: usually your account name in Word or your computer's user name.
+- **Creator and Producer**: the software and version that made the file.
+- **Creation and modification dates**, with time zone.
+- **Title, Subject, Keywords**: sometimes an old working title.
+- **XMP**: a second copy of all of this, plus document IDs and sometimes an editing history.
+
+## The incremental-update trap
+
+PDF allows changes to be appended at the end of the file instead of rewriting it. Fast, but the previous version of the metadata stays inside the file, and recovery tools can read it.
+
+ExifTool's own documentation says its PDF edits are reversible for this reason. That's why EOM never uses ExifTool for PDFs: it rewrites the whole file with pypdf, so the old values are gone.
+
+> Clearing the document properties in a viewer and saving can have the same problem. Check the result with a full metadata reader before you send a sensitive PDF.
+
+## Three ways to do it
+
+**With EOM (free, Windows, Mac, Linux):** drop the PDFs, choose a profile (“Full anonymity” removes everything not needed to display the file), click Clean. Before / after shows what's left.
+
+**With Adobe Acrobat Pro:** use the Redact tools' **Remove Hidden Information** (or Sanitize Document). It also removes hidden layers, comments and attachments.
+
+**At the source:** before exporting from Word, run File › Info › Check for Issues › Inspect Document. See Word, Excel and PowerPoint.
+
+From a terminal, for a folder:
+
+```
+eom clean ~/Documents/to-send -r --profile anonymous --output-dir ~/Documents/clean
+```
+
+## FAQ
+
+### Does “Print to PDF” remove metadata?
+
+It often produces a file with less metadata, but it usually still records the software and dates, sometimes the title. Check the result.
+
+### Does removing metadata change the PDF's content?
+
+No. Pages, text and images stay the same. Only the document properties and the XMP stream are cleared.
+
+### Can I see a PDF's metadata without software?
+
+Most PDF viewers show part of it under Document Properties. To see all of it, including XMP, open it in EOM.
+
+---
+
+# Remove metadata from Word, Excel and PowerPoint files
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-word-excel-powerpoint/
+Language: en · Topic: documents
+
+**In short:** Word, Excel and PowerPoint files store the author, “last modified by”, company, manager, template, revision number and total editing time, and Word keeps the name of everyone who left a comment or tracked change. In Office on Windows: File › Info › Check for Issues › Inspect Document, then Remove All. EOM removes these properties from DOCX, XLSX and PPTX files without opening Office, and replaces comment and tracked-change author names with “Author”.
+
+## What an Office file carries
+
+- **Author** and **Last modified by**: names from the Office account or the computer.
+- **Company** and **Manager**: from the licence or the template.
+- **Total editing time** and **revision number**: how long you worked on it, how many times it was saved.
+- **Template**: sometimes a path on your computer or a company drive.
+- **Comments and tracked changes**: each with the name of the person who made it.
+
+## With Office's Document Inspector (Windows)
+
+1. Save a copy of the file first. Some removals can't be undone.
+2. File › Info › **Check for Issues** › **Inspect Document**.
+3. Tick Document Properties and Personal Information (and Comments, if you want them gone), then Inspect.
+4. Click **Remove All** next to each section you want cleaned.
+
+In Word for Mac, Review › Protect Document offers an option to remove personal information from the file when it's saved.
+
+## With EOM, for many files at once
+
+Drop a folder of DOCX, XLSX and PPTX files on EOM. It reads the core and extended properties and the names behind comments and tracked changes, rates the risk, and removes what the profile says. Office doesn't need to be installed.
+
+Comments and tracked changes themselves are document content. EOM anonymises their author names; to remove the comments, accept or reject the changes in Office.
+
+## FAQ
+
+### Does saving as PDF remove Office metadata?
+
+Part of it is carried over: the PDF usually gets the title and author. Clean the PDF afterwards; see remove metadata from a PDF.
+
+### Do old .doc and .xls files work?
+
+EOM handles the modern formats (DOCX, XLSX, PPTX). Save older files in the new format first.
+
+---
+
+# Remove metadata from MP3, MP4 and video files
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mp3-mp4-video/
+Language: en · Topic: documents
+
+**In short:** MP3 files store ID3 tags (artist, album, comments, “encoded by”, cover art), and FLAC, OGG and M4A have equivalents. MP4 and MOV videos store creation dates, the recording device and, for phone videos, often the GPS location. EOM reads and removes these tags for MP3, FLAC, OGG, Opus, WAV, AIFF, M4A, WMA, APE, WavPack, MP4, M4V, MOV, MKV and WebM.
+
+## Audio: more than the song title
+
+Tags meant for music players can hold personal data: a name in “Artist” or “Encoded by” on a voice memo, comments, the software used, a cover image taken with your phone.
+
+For a podcast or a voice note sent to a journalist, that's worth checking. Drop the files on EOM and choose a profile.
+
+## Video: date, device and place
+
+Phones record the creation date, the device model and often the location in the video file itself. Social networks re-encode videos, but a file sent directly keeps it all.
+
+EOM cleans MP4, M4V and MOV through ExifTool when it's installed (it's bundled with the Windows version), and through its built-in reader otherwise.
+
+## For a music or video library
+
+Clean a whole folder into copies:
+
+```
+eom clean ~/Music/demos -r --profile anonymous --output-dir ~/Music/demos-clean
+```
+
+See all commands in command-line metadata cleaning.
+
+## FAQ
+
+### Does removing tags change the sound or picture?
+
+No. Only the tags are removed; the audio and video streams are untouched.
+
+### Will my music player still show the song names?
+
+Not if you remove everything. Choose a profile that keeps what you need, or clean only the copies you share.
+
+---
+
+# How to remove metadata on Windows
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-windows/
+Language: en · Topic: systems
+
+**In short:** On Windows 10 and 11, right-click a file, choose Properties › Details › Remove Properties and Personal Information, then remove all or selected properties. It works on common photo and Office files, one batch at a time, and doesn't handle every format or metadata block. For full control, EOM runs on Windows without installation, includes ExifTool, cleans whole folders and adds a right-click menu.
+
+## The built-in way
+
+1. Select one or more files in File Explorer, right-click, **Properties**.
+2. Open the **Details** tab and click **Remove Properties and Personal Information**.
+3. Choose **Create a copy with all possible properties removed**, or pick the properties to remove from the file itself.
+
+Limits: it only knows the properties Windows understands for that format, it can't show you a risk, and it says nothing about what it couldn't remove. PDFs, audio and many photo blocks (XMP, maker notes) are out of its reach.
+
+## With EOM
+
+1. Download `eom-windows-x86_64.zip` from the download section, unzip, run `eom.exe`. ExifTool is included.
+2. Drop files or folders. Each gets a risk rating.
+3. Pick a profile, tick “Copies in” if you want to keep the originals, click Clean.
+
+In Settings, you can add EOM to the right-click menu of File Explorer.
+
+In PowerShell, the same binary is a command-line tool:
+
+```
+eom.exe clean C:\Users\me\Pictures -r --profile social --output-dir C:\Users\me\clean
+```
+
+## FAQ
+
+### Does EOM need administrator rights?
+
+No. It's a single executable that runs from any folder.
+
+### Is Windows SmartScreen blocking it?
+
+New unsigned downloads can trigger SmartScreen. Click “More info”, then “Run anyway”. The source code is public on GitHub.
+
+---
+
+# How to remove metadata on a Mac
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mac/
+Language: en · Topic: systems
+
+**In short:** On a Mac, Preview removes a photo's location (Tools › Show Inspector › GPS › Remove Location Info), and Photos can export without location (untick location information in the export options). macOS has no built-in way to remove other metadata or to clean PDFs and Office files in bulk. EOM runs on Apple Silicon Macs, cleans whole folders and verifies the result.
+
+## Preview: one photo's location
+
+1. Open the photo in Preview.
+2. Tools › **Show Inspector**, then the GPS tab.
+3. **Remove Location Info**, then save.
+
+Only the location. The camera, serial numbers, author and dates stay.
+
+## Photos: export without location
+
+Select the photos, File › Export, and untick the location information option in the export dialog. The exported copies have no location; your library keeps it.
+
+## Everything else, in bulk: EOM
+
+1. Download `eom-macos-arm64.zip` from the download section and unzip it.
+2. The binary isn't signed. If macOS blocks it, run `xattr -d com.apple.quarantine eom` once in Terminal.
+3. Drop photos, PDFs or Office files, pick a profile, click Clean.
+
+With Homebrew, `brew install exiftool` gives EOM deeper reading (RAW, maker notes, HEIC).
+
+## FAQ
+
+### Does EOM run on Intel Macs?
+
+The published build targets Apple Silicon (macOS 14 or later). On an Intel Mac you can run EOM from source with Python.
+
+### Does AirDrop keep metadata?
+
+Yes, AirDrop sends the original file. From Photos, turn off Location in the share sheet's Options first.
+
+---
+
+# How to remove metadata on Linux
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-linux/
+Language: en · Topic: systems
+
+**In short:** On Linux, `exiftool -all= file.jpg` removes a photo's metadata and `mat2 file` creates a cleaned copy of many file types. For a graphical tool with a risk rating, cleaning profiles and before/after verification, EOM runs as a single binary on any x86-64 distribution with glibc 2.31 or later, and can add itself to your file manager's right-click menu.
+
+## Command-line tools
+
+**ExifTool** (package `libimage-exiftool-perl` on Debian and Ubuntu):
+
+```
+exiftool -all= photo.jpg          # remove everything, keep a backup
+exiftool -gps:all= photo.jpg      # remove only the GPS block
+exiftool -r -all= ~/Pictures/out  # a whole folder
+```
+
+**mat2** (Metadata Anonymisation Toolkit) writes a `.cleaned` copy and supports images, PDFs, Office and audio files:
+
+```
+mat2 report.pdf
+```
+
+Avoid ExifTool for PDFs you need to anonymise: its PDF edits are incremental and reversible. See PDF metadata.
+
+## EOM: a GUI, profiles and verification
+
+```
+unzip eom-linux-x86_64.zip && chmod +x eom && ./eom
+```
+
+Drop files or folders, read the risk of each, choose what to remove, and check before / after. In Settings, add EOM to the right-click menu of your file manager. Install ExifTool for deeper reading; EOM uses it automatically.
+
+EOM is also a CLI, convenient in scripts: see command-line metadata cleaning.
+
+## FAQ
+
+### Which distributions does EOM run on?
+
+Any x86-64 distribution with glibc 2.31 or later: Ubuntu 20.04+, Debian 11+, Fedora, Arch and so on.
+
+### Is EOM on Flathub or in a package repository?
+
+Not yet. It ships as a single binary on GitHub releases, or runs from source with Python.
+
+---
+
+# Are online metadata removers safe?
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/online-metadata-remover-risks/
+Language: en · Topic: basics
+
+**In short:** Most online metadata removers ask you to upload the file to their server, which means sending the very data you want to hide (location, name, document history) to a third party whose storage and retention you can't verify. Tools that run entirely in your browser avoid the upload, and desktop tools like EOM never send anything and also clean whole folders, PDFs and Office files.
+
+## The paradox of uploading to remove
+
+To remove your location from a photo, an upload-based service receives the photo with the location. You then have to trust that it deletes the file, doesn't log it, doesn't keep backups and isn't breached. Nothing on the page can prove any of that.
+
+For a holiday snap, maybe fine. For a contract, a medical document, a source's photo or a picture of your children, it isn't a bet worth making.
+
+## How to tell if a web tool uploads your file
+
+1. Open your browser's developer tools (F12), Network tab.
+2. Drop a file into the tool.
+3. If a request carries a payload the size of your file, it was uploaded.
+
+Our own photo checker passes this test: it reads the file in your browser and sends nothing. It only reads, though. To remove metadata, use a desktop app.
+
+## Online tools vs EOM
+
+|  | Upload-based tools | EOM |
+| --- | --- | --- |
+| File stays on your device | No | Yes |
+| Works offline | No | Yes |
+| Whole folders | Varies | Yes |
+| PDF, Office, audio, video | Varies | Yes |
+| Shows what's left after cleaning | Rarely | Yes |
+| Price, account | Varies | Free, none |
+
+## FAQ
+
+### Do online metadata removers keep my files?
+
+You can't know for sure. Some publish retention policies, but nothing in the browser lets you verify them.
+
+### Are browser-only tools safe?
+
+If they really run locally (check the Network tab), the file doesn't leave your device. Most can only read, or handle a few formats.
+
+---
+
+# Strip metadata from the command line
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/guides/strip-metadata-command-line/
+Language: en · Topic: systems
+
+**In short:** The EOM binary is also a command-line tool: `eom risk PATH -r` prints each file's privacy risk and exits with 0 (clean or low), 1 (medium) or 2 (high); `eom clean PATH -r --profile social --output-dir OUT` writes cleaned copies; `eom extract` exports reports in JSON, CSV, HTML or text; `eom edit` sets fields or shifts dates. It works the same on Windows, macOS and Linux.
+
+## The commands
+
+```
+eom extract photo.jpg --format json         # print metadata (txt, json, csv, html)
+eom extract ~/Pictures -r -o report.html    # recursive HTML report
+eom risk ~/Pictures -r -v                   # exit code: 0 clean/low, 1 medium, 2 high
+eom clean ~/Pictures -r --profile social --output-dir ~/clean
+eom clean doc.pdf --categories location,identity --dry-run -v
+eom edit photo.jpg --author "Jane" --copyright "CC-BY 4.0" --shift +2h
+eom profiles                                # list profiles and categories
+```
+
+Profiles: `all`, `anonymous`, `social`, `keep_copyright`, `location`. Or pass `--categories` with any of: location, identity, identifiers, device, dates, software, thumbnail, copyright, technical, other.
+
+## Block leaks in CI
+
+`eom risk` exits with 2 when any file is high risk, which fails a CI step. Useful for a website's image folder or a documentation repository:
+
+```
+- name: No location or author data in published images
+  run: |
+    curl -sL -o eom.zip https://github.com/abogo-nono/eom/releases/latest/download/eom-linux-x86_64.zip
+    unzip -q eom.zip -d eom && chmod +x eom/eom
+    ./eom/eom risk public/images -r -v
+```
+
+Want to allow medium risk (dates, device)? Treat exit code 1 as success in your script.
+
+## Dry runs and copies
+
+`--dry-run` shows what would be removed without writing anything. `--output-dir` writes cleaned copies and never overwrites an existing file. Without it, files are cleaned in place.
+
+## FAQ
+
+### Does the CLI need a display?
+
+No. CLI commands don't open a window. The binary still loads the Qt libraries, so on a minimal container install `libegl1 libgl1 libxkbcommon0 libdbus-1-3` first.
+
+### Can I use ExifTool from EOM's CLI?
+
+Yes, automatically: if ExifTool is installed, EOM uses it to read files and to clean the formats it writes safely.
+
+---
+
+# Comment supprimer la position GPS d'une photo
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-position-gps-photo/
+Language: fr · Topic: photos
+
+**En bref:** La position d'une photo est stockée dans ses balises EXIF GPS (GPSLatitude, GPSLongitude, GPSAltitude). Pour la supprimer : sous Windows, Propriétés › Détails › Supprimer les propriétés et les informations personnelles. Sur Mac, ouvrez la photo dans Aperçu › Outils › Afficher l'inspecteur › GPS › Supprimer les infos de localisation. Sur iPhone, touchez Options dans la feuille de partage et désactivez Position. Sur n'importe quel système et pour autant de fichiers que vous voulez, déposez-les sur EOM, choisissez le profil « Position uniquement » et cliquez sur Nettoyer.
+
+## D'abord, vérifiez si la photo contient une position
+
+Les téléphones inscrivent la position dans chaque photo dès que l'appareil photo a accès à la localisation, ce qui est le réglage par défaut sur beaucoup de modèles. Les appareils photo avec GPS intégré ou reliés à un téléphone font de même.
+
+Le plus rapide : déposez la photo sur notre vérificateur dans le navigateur. Il lit le fichier sur votre appareil et affiche les coordonnées s'il y en a. Vous pouvez aussi regarder dans l'Explorateur Windows (Propriétés › Détails, section GPS) ou dans Aperçu sur Mac (Outils › Afficher l'inspecteur › onglet GPS).
+
+La position est en général précise à quelques mètres. Assez pour désigner une maison, pas seulement une rue.
+
+## Supprimer la position sur votre ordinateur
+
+**Windows (une ou quelques photos, JPEG/TIFF) :**
+
+1. Clic droit sur la photo, puis Propriétés.
+2. Onglet Détails, puis **Supprimer les propriétés et les informations personnelles** en bas.
+3. Choisissez « Supprimer les propriétés suivantes de ce fichier », cochez les champs GPS (ou Sélectionner tout), puis OK.
+
+**Mac (une photo à la fois) :**
+
+1. Ouvrez la photo dans Aperçu.
+2. Outils › Afficher l'inspecteur, puis l'onglet GPS.
+3. Cliquez sur **Supprimer les infos de localisation** et enregistrez.
+
+**Linux, ou tout système avec ExifTool :** `exiftool -gps:all= photo.jpg` supprime le bloc GPS et garde une sauvegarde nommée `photo.jpg_original`.
+
+> Une position peut aussi être stockée hors du bloc GPS : dans le XMP, et sous forme de noms de lieux (ville, pays, quartier) dans l'IPTC. Les outils intégrés aux systèmes les oublient souvent. Le profil « Position uniquement » d'EOM les supprime tous.
+
+## La supprimer d'un dossier entier d'un coup
+
+Les outils système fonctionnent fichier par fichier. Pour un dossier de vacances, un shooting ou une sauvegarde de téléphone, utilisez EOM :
+
+1. Téléchargez EOM (gratuit, sans installation) et ouvrez-le.
+2. Déposez le dossier sur la fenêtre. Chaque photo reçoit une note de risque.
+3. Choisissez le profil **Position uniquement**. L'aperçu montre exactement les balises qui vont partir.
+4. Cochez **Copies dans** pour garder les originaux intacts, puis cliquez sur **Nettoyer**.
+5. Ouvrez Avant / après sur n'importe quel fichier pour confirmer que les balises GPS ont disparu.
+
+Dans un terminal, c'est une seule ligne :
+
+```
+eom clean ~/Images/vacances -r --profile location --output-dir ~/Images/vacances-propres
+```
+
+## Empêcher votre téléphone de l'ajouter
+
+**iPhone :** Réglages › Confidentialité et sécurité › Service de localisation › Appareil photo › **Jamais**. Les nouvelles photos ne seront plus géolocalisées. Celles déjà prises gardent leur position.
+
+**Android :** ouvrez l'appli Appareil photo, ses paramètres, et désactivez l'option de localisation. Elle s'appelle « Enregistrer la position », « Balises de localisation » ou à peu près, selon le fabricant.
+
+La désactiver supprime la vue carte de votre galerie. Si vous y tenez, gardez la localisation et retirez-la seulement des copies que vous partagez. Voir photos iPhone et Android.
+
+## Les réseaux sociaux ne l'enlèvent pas déjà ?
+
+Les grandes plateformes retirent en général les données EXIF de la copie publique d'une photo. Cela vous protège des autres utilisateurs, pas de la plateforme, qui reçoit le fichier original.
+
+Beaucoup de canaux transmettent le fichier original, position comprise : pièces jointes d'e-mail, liens de partage cloud, photos envoyées « en tant que fichier » ou « document » dans les messageries, nombre de forums et de sites de petites annonces, fichiers copiés sur une clé USB. Nettoyez avant de partager, et vous n'avez pas à connaître les règles de chacun.
+
+## Questions
+
+### Une capture d'écran contient-elle une position GPS ?
+
+En général non. Les captures d'écran n'enregistrent pas de GPS. Elles peuvent tout de même contenir le modèle de l'appareil, la date et le logiciel.
+
+### Supprimer la position dégrade-t-il la photo ?
+
+Aucune différence visible. Avec ExifTool installé, EOM ne touche pas du tout aux données de l'image. Sans lui, les JPEG sont réenregistrés avec leurs réglages de qualité d'origine.
+
+### Puis-je supprimer la position mais garder la date ?
+
+Oui. Le profil « Position uniquement » d'EOM supprime les coordonnées GPS et les noms de lieux, et garde tout le reste, dates comprises.
+
+### La position est-elle aussi dans le nom du fichier ou du dossier ?
+
+Pas dans le fichier photo lui-même, mais certaines applis nomment les exports ou les albums d'après un lieu. Vérifiez aussi les noms avant de partager.
+
+---
+
+# Supprimer la position des photos iPhone et Android
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-position-photos-iphone-android/
+Language: fr · Topic: photos
+
+**En bref:** Sur iPhone, touchez Partager, puis Options en haut de la feuille de partage, et désactivez Position avant d'envoyer. Pour ne plus l'enregistrer : Réglages › Confidentialité et sécurité › Service de localisation › Appareil photo › Jamais. Sur Android, désactivez l'option de localisation dans les paramètres de l'appli Appareil photo. Pour les photos déjà prises, retirez la position au moment du partage, ou nettoyez-les sur ordinateur avec EOM.
+
+## Pourquoi votre téléphone enregistre l'endroit de chaque photo
+
+Les galeries s'en servent pour la vue carte et les « souvenirs ». Pour cela, l'appareil photo écrit des coordonnées GPS dans chaque photo, précises à quelques mètres. Elles suivent le fichier partout où il va.
+
+La plupart des gens ne le remarquent jamais, car rien ne se voit sur l'image. Notre vérificateur de photos le montre en une seconde.
+
+## iPhone : partager une photo sans sa position
+
+1. Sélectionnez la photo (ou plusieurs) dans Photos et touchez **Partager**.
+2. En haut de la feuille de partage, touchez **Options**.
+3. Désactivez **Position**, touchez OK et partagez normalement.
+
+Seule la copie envoyée est concernée. La photo de votre photothèque garde sa position. Le bouton Options s'applique aussi à AirDrop, Messages et Mail.
+
+## iPhone : ne plus géolocaliser les nouvelles photos
+
+Réglages › Confidentialité et sécurité › Service de localisation › Appareil photo › **Jamais**. Les nouvelles photos n'auront plus de position. Les anciennes ne changent pas.
+
+Les iPhone enregistrent les photos en HEIC par défaut. Les fichiers HEIC contiennent les mêmes données EXIF que les JPEG, position comprise.
+
+## Android
+
+Chaque fabricant a sa propre appli photo, les noms changent donc, mais le réglage existe partout :
+
+- Ouvrez l'appli **Appareil photo** et ses paramètres (roue dentée).
+- Désactivez **Enregistrer la position**, **Balises de localisation** ou l'option au nom proche.
+- Ou retirez l'autorisation de localisation : Paramètres › Applications › Appareil photo › Autorisations.
+
+Certaines galeries peuvent retirer la position au moment du partage. Regardez les options de partage de la vôtre. En cas de doute, vérifiez le fichier reçu avec le vérificateur.
+
+## Les photos déjà prises
+
+Copiez-les sur un ordinateur, déposez le dossier sur EOM et utilisez le profil **Position uniquement** ou **Partage sur les réseaux sociaux**. Cochez « Copies dans » pour garder les originaux avec leur carte et partager les copies propres.
+
+Les vidéos filmées au téléphone contiennent souvent une position elles aussi. Voir fichiers MP3, MP4 et vidéo.
+
+## Questions
+
+### Si je désactive Position dans les Options de partage, la photo de ma photothèque change-t-elle ?
+
+Non. Seule la copie envoyée est nettoyée. La photo de votre photothèque garde sa position.
+
+### AirDrop envoie-t-il la position ?
+
+AirDrop envoie le fichier original, position comprise, sauf si vous désactivez Position dans les Options de la feuille de partage avant.
+
+### Les messageries retirent-elles la position ?
+
+Cela dépend de l'appli et de la façon d'envoyer. Une photo envoyée « en tant que fichier » ou « document » est en général l'original, avec ses métadonnées. Nettoyez-la avant pour être sûr.
+
+---
+
+# Qu'est-ce que les données EXIF ?
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/quest-ce-que-les-donnees-exif/
+Language: fr · Topic: basics
+
+**En bref:** L'EXIF (Exchangeable Image File Format) est une norme pour stocker des informations à l'intérieur des fichiers photo. Appareils photo et téléphones y enregistrent la marque et le modèle, les réglages de prise de vue (exposition, ouverture, ISO, focale), la date et l'heure, et souvent la position GPS et le numéro de série de l'appareil. C'est invisible sur l'image, mais toute personne qui possède le fichier peut le lire avec des outils gratuits.
+
+## Ce que contient un bloc EXIF
+
+Une photo de téléphone porte des dizaines de balises. Celles qui comptent pour votre vie privée :
+
+| Balise | Exemple | Ce qu'elle révèle |
+| --- | --- | --- |
+| GPSLatitude / GPSLongitude | 48° 51' 30" N, 2° 17' 40" E | Où vous étiez, à quelques mètres près |
+| DateTimeOriginal | 2024:03:14 08:42:31 | Quand, à la seconde |
+| Make / Model | Apple iPhone 15 Pro | Quel appareil vous utilisez |
+| BodySerialNumber | DNPXQ2M5… | Relie toutes les photos du même appareil |
+| Artist / Copyright | Jane Doe | Votre nom |
+| Software | 17.3.1 / Lightroom | Le logiciel et sa version |
+| ThumbnailImage | JPEG 160×120 | Un aperçu qui peut survivre aux recadrages |
+
+Le reste est technique : exposition, ouverture, ISO, flash, balance des blancs, orientation. Sans danger en soi.
+
+## EXIF, XMP et IPTC : trois endroits pour le même genre de données
+
+L'**EXIF** date de 1995 et est écrit par l'appareil. Le **XMP**, plus récent, est surtout écrit par les logiciels de retouche comme Lightroom ou Photoshop ; il peut contenir les mêmes champs et un historique de retouche. L'**IPTC** vient de la presse et contient légendes, mots-clés, crédits et noms de lieux.
+
+Un nettoyage qui ne touche que l'EXIF peut laisser votre nom dans le XMP ou votre ville dans l'IPTC. EOM lit et supprime les trois.
+
+## Qui peut les lire
+
+Toute personne qui a le fichier. Chaque système en affiche une partie dans les propriétés du fichier, et des outils gratuits affichent tout. Pas de mot de passe, pas de compétence particulière.
+
+Ce qui compte, c'est que le fichier arrive en version originale. Les grands réseaux sociaux retirent en général l'EXIF des copies publiques. Les pièces jointes, les liens cloud, les photos envoyées en tant que fichier et beaucoup de sites, non. Voir ce que révèlent les métadonnées.
+
+## Comment voir les données EXIF d'une photo
+
+- Dans le navigateur, sans envoi : notre vérificateur de photos.
+- Windows : clic droit › Propriétés › Détails.
+- Mac : Aperçu › Outils › Afficher l'inspecteur › onglet (i), puis EXIF et GPS.
+- Toutes les balises, sur tout système : ouvrez la photo dans EOM, ou lancez `exiftool photo.jpg`.
+
+## Comment les supprimer
+
+Supprimer l'EXIF ne change pas l'image. Vous pouvez tout supprimer, ou seulement l'essentiel : la position, votre nom, les numéros de série. C'est exactement ce que font les profils d'EOM, et le guide supprimer la position GPS d'une photo détaille les outils intégrés de chaque système.
+
+## Questions
+
+### Les données EXIF, est-ce la même chose que les métadonnées ?
+
+L'EXIF est un type de métadonnées, propre aux images. Les photos peuvent aussi contenir du XMP et de l'IPTC, et les autres fichiers ont les leurs : ID3 dans les MP3, propriétés de document dans les PDF et fichiers Office.
+
+### Les fichiers PNG ont-ils des données EXIF ?
+
+C'est possible. Le PNG accepte l'EXIF et des blocs de texte, même si beaucoup d'applis y écrivent moins que dans les JPEG.
+
+### Supprimer l'EXIF modifie-t-il la photo ?
+
+Non. Les pixels restent identiques. Seule la balise d'orientation peut compter : sans elle, quelques visionneuses affichent la photo pivotée. Les profils d'EOM autres que « Tout supprimer » gardent les balises techniques comme l'orientation.
+
+---
+
+# Ce que les métadonnées de vos photos révèlent sur vous
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/ce-que-revelent-les-metadonnees/
+Language: fr · Topic: basics
+
+**En bref:** Les métadonnées d'une photo peuvent révéler où vous étiez (coordonnées GPS précises à quelques mètres), qui vous êtes (noms d'auteur et de propriétaire), quel appareil vous utilisez (marque, modèle, numéros de série qui relient vos photos entre elles), quand vous y étiez (horodatage à la seconde) et comment le fichier a été retouché. EOM classe chaque balise dans ces catégories et note chaque fichier : risque élevé, moyen, faible ou aucun.
+
+## Six choses qu'un fichier peut dire de vous
+
+**1. Où vous étiez.** Latitude, longitude et altitude GPS, plus des noms de lieux (ville, pays). Quelques photos prises chez vous donnent votre adresse.
+
+**2. Qui vous êtes.** Auteur, artiste, propriétaire, titulaire du copyright, le nom « modifié par » d'un document, la société à qui votre logiciel est licencié.
+
+**3. Ce qui vous relie.** Numéros de série des boîtiers et objectifs, identifiants uniques d'images et de documents. Ils rattachent à une même personne des photos publiées sous des comptes différents.
+
+**4. Ce que vous possédez.** Marque, modèle, objectif, firmware.
+
+**5. Quand.** L'heure de prise de vue à la seconde, avec le fuseau. Sur beaucoup de photos, cela dessine une routine.
+
+**6. Ce que le fichier a subi.** Logiciel, historique de retouche, et dans les documents, les auteurs des révisions et le temps total d'édition.
+
+## Un cas réel : retrouvé grâce au GPS d'une photo
+
+En décembre 2012, John McAfee, recherché pour être interrogé par la police du Belize, se cachait. Des journalistes de Vice ont publié une photo de lui. Elle contenait toujours ses coordonnées GPS, et des lecteurs l'ont situé au Guatemala en quelques heures. Le lieu devait rester secret. Personne n'avait vérifié le fichier.
+
+C'est le cas d'école justement parce qu'il est banal : une photo, aucun piratage, juste un fichier qui en disait plus que son auteur ne le voulait.
+
+## Des situations quotidiennes où cela compte
+
+- Vendre un objet en ligne depuis chez soi : les photos de l'annonce peuvent porter votre adresse.
+- Envoyer un CV ou un rapport en PDF ou Word : auteur, société et anciennes révisions voyagent avec.
+- Publier sous pseudonyme : le numéro de série de l'appareil peut relier le compte à votre vrai nom.
+- Partager des photos d'enfants : position et habitudes.
+- Journalistes et militants : sources, lieux et appareils.
+
+## Comment EOM évalue le risque
+
+EOM range chaque balise dans une catégorie, et chaque catégorie a une gravité :
+
+| Gravité | Catégories |
+| --- | --- |
+| Élevée | Position, identité, identifiants uniques et numéros de série |
+| Moyenne | Appareil, dates, logiciel et historique de retouche, miniatures intégrées |
+| Faible | Copyright et licence, autres balises |
+| Aucune | Balises techniques (taille, couleur, exposition) |
+
+La note d'un fichier est celle de sa catégorie la plus grave. Une seule balise GPS suffit à classer un fichier en risque élevé. Testez n'importe quelle photo avec le vérificateur dans le navigateur, qui applique les mêmes règles.
+
+## Questions
+
+### Les métadonnées peuvent-elles révéler mon adresse ?
+
+Oui. Les coordonnées GPS des photos prises chez vous désignent le bâtiment, souvent à quelques mètres près.
+
+### Mes photos peuvent-elles être reliées entre elles sans mon nom ?
+
+Oui. Les numéros de série du boîtier et de l'objectif, et certains identifiants d'image, sont les mêmes sur toutes les photos de l'appareil.
+
+### Toutes les métadonnées sont-elles dangereuses ?
+
+Non. Les balises techniques comme l'exposition, le profil couleur ou l'orientation ne révèlent rien de personnel. C'est pourquoi EOM peut supprimer l'essentiel et garder le reste.
+
+---
+
+# Comment supprimer les métadonnées d'un PDF, correctement
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-pdf/
+Language: fr · Topic: documents
+
+**En bref:** Un PDF garde ses métadonnées à deux endroits : le dictionnaire d'informations du document (Titre, Auteur, Sujet, Mots-clés, Créateur, Producteur, dates) et un flux XMP. Beaucoup d'outils les modifient par une mise à jour incrémentale ajoutée à la fin du fichier, ce qui laisse les anciennes valeurs récupérables. Pour vraiment supprimer les métadonnées d'un PDF, il faut réécrire le fichier. EOM réécrit toujours les PDF ; la fonction Supprimer les informations masquées d'Adobe Acrobat Pro aussi.
+
+## Ce que révèle un PDF
+
+- **Auteur** : souvent le nom de votre compte Word ou de votre session.
+- **Créateur et Producteur** : le logiciel et la version qui ont produit le fichier.
+- **Dates de création et de modification**, avec le fuseau horaire.
+- **Titre, Sujet, Mots-clés** : parfois un ancien titre de travail.
+- **XMP** : une deuxième copie de tout cela, plus des identifiants de document et parfois un historique.
+
+## Le piège des mises à jour incrémentales
+
+Le format PDF permet d'ajouter des modifications à la fin du fichier au lieu de le réécrire. C'est rapide, mais l'ancienne version des métadonnées reste dans le fichier, et des outils de récupération peuvent la lire.
+
+La documentation d'ExifTool indique elle-même que ses modifications de PDF sont réversibles pour cette raison. C'est pourquoi EOM n'utilise jamais ExifTool pour les PDF : il réécrit tout le fichier avec pypdf, et les anciennes valeurs disparaissent.
+
+> Vider les propriétés du document dans une visionneuse puis enregistrer peut poser le même problème. Vérifiez le résultat avec un lecteur de métadonnées complet avant d'envoyer un PDF sensible.
+
+## Trois façons de faire
+
+**Avec EOM (gratuit, Windows, Mac, Linux) :** déposez les PDF, choisissez un profil (« Anonymat total » supprime tout ce qui n'est pas nécessaire à l'affichage), cliquez sur Nettoyer. Avant / après montre ce qui reste.
+
+**Avec Adobe Acrobat Pro :** dans les outils de biffure, utilisez **Supprimer les informations masquées** (ou Nettoyer le document). Cela retire aussi calques masqués, commentaires et pièces jointes.
+
+**À la source :** avant d'exporter depuis Word, lancez Fichier › Informations › Vérifier la présence de problèmes › Inspecter le document. Voir Word, Excel et PowerPoint.
+
+Dans un terminal, pour un dossier :
+
+```
+eom clean ~/Documents/a-envoyer -r --profile anonymous --output-dir ~/Documents/propres
+```
+
+## Questions
+
+### « Imprimer en PDF » supprime-t-il les métadonnées ?
+
+Le fichier produit en contient souvent moins, mais il garde en général le logiciel et les dates, parfois le titre. Vérifiez le résultat.
+
+### Supprimer les métadonnées change-t-il le contenu du PDF ?
+
+Non. Pages, texte et images restent identiques. Seuls les propriétés du document et le flux XMP sont vidés.
+
+### Peut-on voir les métadonnées d'un PDF sans logiciel ?
+
+La plupart des lecteurs PDF en montrent une partie dans Propriétés du document. Pour tout voir, XMP compris, ouvrez-le dans EOM.
+
+---
+
+# Supprimer les métadonnées des fichiers Word, Excel et PowerPoint
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-word-excel-powerpoint/
+Language: fr · Topic: documents
+
+**En bref:** Les fichiers Word, Excel et PowerPoint stockent l'auteur, le « modifié par », la société, le responsable, le modèle, le numéro de révision et le temps total d'édition, et Word garde le nom de chaque personne qui a laissé un commentaire ou une modification suivie. Dans Office sous Windows : Fichier › Informations › Vérifier la présence de problèmes › Inspecter le document, puis Supprimer tout. EOM supprime ces propriétés des fichiers DOCX, XLSX et PPTX sans ouvrir Office, et remplace le nom des auteurs de commentaires et de modifications par « Author ».
+
+## Ce que contient un fichier Office
+
+- **Auteur** et **Modifié par** : noms issus du compte Office ou de l'ordinateur.
+- **Société** et **Responsable** : issus de la licence ou du modèle.
+- **Temps total d'édition** et **numéro de révision** : combien de temps vous y avez passé, combien de fois il a été enregistré.
+- **Modèle** : parfois un chemin sur votre ordinateur ou un lecteur d'entreprise.
+- **Commentaires et modifications suivies** : chacun avec le nom de son auteur.
+
+## Avec l'Inspecteur de document d'Office (Windows)
+
+1. Enregistrez d'abord une copie du fichier. Certaines suppressions sont définitives.
+2. Fichier › Informations › **Vérifier la présence de problèmes** › **Inspecter le document**.
+3. Cochez Propriétés du document et informations personnelles (et Commentaires, si vous voulez les retirer), puis Inspecter.
+4. Cliquez sur **Supprimer tout** pour chaque section à nettoyer.
+
+Dans Word pour Mac, Révision › Protéger le document propose une option pour supprimer les informations personnelles du fichier à l'enregistrement.
+
+## Avec EOM, pour beaucoup de fichiers d'un coup
+
+Déposez un dossier de fichiers DOCX, XLSX et PPTX sur EOM. Il lit les propriétés principales et étendues ainsi que les noms derrière les commentaires et modifications suivies, évalue le risque, et supprime ce que prévoit le profil. Office n'a pas besoin d'être installé.
+
+Les commentaires et modifications suivies font partie du contenu du document. EOM anonymise le nom de leurs auteurs ; pour supprimer les commentaires eux-mêmes, acceptez ou refusez les modifications dans Office.
+
+## Questions
+
+### Enregistrer en PDF supprime-t-il les métadonnées Office ?
+
+Une partie passe dans le PDF : il reprend en général le titre et l'auteur. Nettoyez le PDF ensuite ; voir supprimer les métadonnées d'un PDF.
+
+### Les anciens fichiers .doc et .xls fonctionnent-ils ?
+
+EOM gère les formats modernes (DOCX, XLSX, PPTX). Enregistrez d'abord les anciens fichiers au nouveau format.
+
+---
+
+# Supprimer les métadonnées des fichiers MP3, MP4 et vidéo
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-mp3-video/
+Language: fr · Topic: documents
+
+**En bref:** Les MP3 stockent des balises ID3 (artiste, album, commentaires, « encodé par », pochette), et les FLAC, OGG et M4A ont leurs équivalents. Les vidéos MP4 et MOV stockent la date de création, l'appareil et, pour les vidéos de téléphone, souvent la position GPS. EOM lit et supprime ces balises pour MP3, FLAC, OGG, Opus, WAV, AIFF, M4A, WMA, APE, WavPack, MP4, M4V, MOV, MKV et WebM.
+
+## Audio : plus que le titre du morceau
+
+Des balises prévues pour les lecteurs de musique peuvent contenir des données personnelles : un nom dans « Artiste » ou « Encodé par » sur un mémo vocal, des commentaires, le logiciel utilisé, une pochette prise avec votre téléphone.
+
+Pour un podcast ou une note vocale envoyée à un journaliste, cela vaut le coup de vérifier. Déposez les fichiers sur EOM et choisissez un profil.
+
+## Vidéo : date, appareil et lieu
+
+Les téléphones enregistrent dans le fichier vidéo la date de création, le modèle de l'appareil et souvent la position. Les réseaux sociaux réencodent les vidéos, mais un fichier envoyé directement garde tout.
+
+EOM nettoie les MP4, M4V et MOV via ExifTool quand il est installé (il est inclus dans la version Windows), et via son lecteur intégré sinon.
+
+## Pour une bibliothèque de musique ou de vidéos
+
+Nettoyer tout un dossier vers des copies :
+
+```
+eom clean ~/Musique/demos -r --profile anonymous --output-dir ~/Musique/demos-propres
+```
+
+Toutes les commandes dans nettoyer les métadonnées en ligne de commande.
+
+## Questions
+
+### Supprimer les balises change-t-il le son ou l'image ?
+
+Non. Seules les balises sont supprimées ; les flux audio et vidéo ne sont pas touchés.
+
+### Mon lecteur affichera-t-il encore les titres ?
+
+Pas si vous supprimez tout. Choisissez un profil qui garde ce qu'il vous faut, ou nettoyez seulement les copies que vous partagez.
+
+---
+
+# Comment supprimer les métadonnées sous Windows
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-windows/
+Language: fr · Topic: systems
+
+**En bref:** Sous Windows 10 et 11, clic droit sur un fichier, Propriétés › Détails › Supprimer les propriétés et les informations personnelles, puis supprimez tout ou une sélection. Cela marche pour les photos et fichiers Office courants, par lot, mais pas pour tous les formats ni tous les blocs de métadonnées. Pour un contrôle complet, EOM tourne sous Windows sans installation, inclut ExifTool, nettoie des dossiers entiers et s'ajoute au menu du clic droit.
+
+## La méthode intégrée
+
+1. Sélectionnez un ou plusieurs fichiers dans l'Explorateur, clic droit, **Propriétés**.
+2. Onglet **Détails**, puis **Supprimer les propriétés et les informations personnelles**.
+3. Choisissez **Créer une copie en supprimant toutes les propriétés possibles**, ou cochez les propriétés à supprimer du fichier lui-même.
+
+Limites : elle ne connaît que les propriétés que Windows comprend pour chaque format, ne montre aucun risque et ne dit rien de ce qu'elle n'a pas pu supprimer. Les PDF, l'audio et de nombreux blocs des photos (XMP, notes du fabricant) lui échappent.
+
+## Avec EOM
+
+1. Téléchargez `eom-windows-x86_64.zip` depuis la section téléchargement, décompressez, lancez `eom.exe`. ExifTool est inclus.
+2. Déposez fichiers ou dossiers. Chacun reçoit une note de risque.
+3. Choisissez un profil, cochez « Copies dans » pour garder les originaux, cliquez sur Nettoyer.
+
+Dans les Réglages, vous pouvez ajouter EOM au menu du clic droit de l'Explorateur.
+
+Dans PowerShell, le même binaire est un outil en ligne de commande :
+
+```
+eom.exe clean C:\Users\moi\Pictures -r --profile social --output-dir C:\Users\moi\propre
+```
+
+## Questions
+
+### EOM a-t-il besoin des droits administrateur ?
+
+Non. C'est un seul exécutable qui se lance depuis n'importe quel dossier.
+
+### Windows SmartScreen le bloque ?
+
+Les nouveaux téléchargements non signés peuvent déclencher SmartScreen. Cliquez sur « Informations complémentaires », puis « Exécuter quand même ». Le code source est public sur GitHub.
+
+---
+
+# Comment supprimer les métadonnées sur Mac
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-mac/
+Language: fr · Topic: systems
+
+**En bref:** Sur Mac, Aperçu retire la position d'une photo (Outils › Afficher l'inspecteur › GPS › Supprimer les infos de localisation), et Photos peut exporter sans position (décochez les informations de localisation dans les options d'export). macOS n'a pas d'outil intégré pour retirer les autres métadonnées ni pour nettoyer PDF et fichiers Office en masse. EOM tourne sur les Mac Apple Silicon, nettoie des dossiers entiers et vérifie le résultat.
+
+## Aperçu : la position d'une photo
+
+1. Ouvrez la photo dans Aperçu.
+2. Outils › **Afficher l'inspecteur**, puis l'onglet GPS.
+3. **Supprimer les infos de localisation**, puis enregistrez.
+
+Seulement la position. L'appareil, les numéros de série, l'auteur et les dates restent.
+
+## Photos : exporter sans position
+
+Sélectionnez les photos, Fichier › Exporter, et décochez l'option des informations de localisation dans la fenêtre d'export. Les copies exportées n'ont pas de position ; votre photothèque la garde.
+
+## Tout le reste, en masse : EOM
+
+1. Téléchargez `eom-macos-arm64.zip` depuis la section téléchargement et décompressez-le.
+2. Le binaire n'est pas signé. Si macOS le bloque, lancez une fois `xattr -d com.apple.quarantine eom` dans le Terminal.
+3. Déposez photos, PDF ou fichiers Office, choisissez un profil, cliquez sur Nettoyer.
+
+Avec Homebrew, `brew install exiftool` donne à EOM une lecture plus profonde (RAW, notes du fabricant, HEIC).
+
+## Questions
+
+### EOM fonctionne-t-il sur les Mac Intel ?
+
+La version publiée vise Apple Silicon (macOS 14 ou plus récent). Sur un Mac Intel, vous pouvez lancer EOM depuis le code source avec Python.
+
+### AirDrop conserve-t-il les métadonnées ?
+
+Oui, AirDrop envoie le fichier original. Depuis Photos, désactivez d'abord Position dans les Options de la feuille de partage.
+
+---
+
+# Comment supprimer les métadonnées sous Linux
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-linux/
+Language: fr · Topic: systems
+
+**En bref:** Sous Linux, `exiftool -all= fichier.jpg` supprime les métadonnées d'une photo et `mat2 fichier` crée une copie nettoyée de nombreux types de fichiers. Pour un outil graphique avec note de risque, profils de nettoyage et vérification avant/après, EOM tourne en un seul binaire sur toute distribution x86-64 avec glibc 2.31 ou plus, et peut s'ajouter au clic droit de votre gestionnaire de fichiers.
+
+## Les outils en ligne de commande
+
+**ExifTool** (paquet `libimage-exiftool-perl` sur Debian et Ubuntu) :
+
+```
+exiftool -all= photo.jpg           # tout supprimer, avec sauvegarde
+exiftool -gps:all= photo.jpg       # seulement le bloc GPS
+exiftool -r -all= ~/Images/export  # un dossier entier
+```
+
+**mat2** (Metadata Anonymisation Toolkit) écrit une copie `.cleaned` et gère images, PDF, fichiers Office et audio :
+
+```
+mat2 rapport.pdf
+```
+
+Évitez ExifTool pour les PDF à anonymiser : ses modifications de PDF sont incrémentales et réversibles. Voir métadonnées PDF.
+
+## EOM : une interface, des profils et une vérification
+
+```
+unzip eom-linux-x86_64.zip && chmod +x eom && ./eom
+```
+
+Déposez fichiers ou dossiers, lisez le risque de chacun, choisissez ce qui part, et vérifiez avant / après. Dans les Réglages, ajoutez EOM au clic droit de votre gestionnaire de fichiers. Installez ExifTool pour une lecture plus profonde ; EOM l'utilise automatiquement.
+
+EOM est aussi une CLI, pratique dans des scripts : voir nettoyer les métadonnées en ligne de commande.
+
+## Questions
+
+### Sur quelles distributions EOM fonctionne-t-il ?
+
+Toute distribution x86-64 avec glibc 2.31 ou plus : Ubuntu 20.04+, Debian 11+, Fedora, Arch, etc.
+
+### EOM est-il sur Flathub ou dans un dépôt de paquets ?
+
+Pas encore. Il est distribué en un seul binaire dans les versions GitHub, ou se lance depuis le code source avec Python.
+
+---
+
+# Les outils en ligne de suppression des métadonnées sont-ils sûrs ?
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/outils-en-ligne-suppression-metadonnees/
+Language: fr · Topic: basics
+
+**En bref:** La plupart des outils en ligne de suppression des métadonnées demandent d'envoyer le fichier sur leur serveur, c'est-à-dire de transmettre justement les données que vous voulez cacher (position, nom, historique du document) à un tiers dont vous ne pouvez vérifier ni le stockage ni la durée de conservation. Les outils qui tournent entièrement dans le navigateur évitent l'envoi, et les logiciels de bureau comme EOM n'envoient rien et nettoient aussi des dossiers entiers, des PDF et des fichiers Office.
+
+## Le paradoxe : envoyer pour supprimer
+
+Pour retirer la position d'une photo, un service en ligne reçoit la photo avec la position. Il faut ensuite croire qu'il supprime le fichier, ne le journalise pas, n'en garde pas de sauvegarde et ne se fait pas pirater. Rien sur la page ne peut le prouver.
+
+Pour une photo de vacances, pourquoi pas. Pour un contrat, un document médical, la photo d'une source ou de vos enfants, ce n'est pas un pari qui vaut le coup.
+
+## Savoir si un outil web envoie votre fichier
+
+1. Ouvrez les outils de développement du navigateur (F12), onglet Réseau.
+2. Déposez un fichier dans l'outil.
+3. Si une requête transporte un contenu de la taille de votre fichier, il a été envoyé.
+
+Notre vérificateur de photos passe ce test : il lit le fichier dans le navigateur et n'envoie rien. Mais il ne fait que lire. Pour supprimer les métadonnées, utilisez une application de bureau.
+
+## Outils en ligne ou EOM
+
+|  | Outils avec envoi | EOM |
+| --- | --- | --- |
+| Le fichier reste sur votre appareil | Non | Oui |
+| Fonctionne hors ligne | Non | Oui |
+| Dossiers entiers | Variable | Oui |
+| PDF, Office, audio, vidéo | Variable | Oui |
+| Montre ce qui reste après nettoyage | Rarement | Oui |
+| Prix, compte | Variable | Gratuit, aucun |
+
+## Questions
+
+### Les outils en ligne gardent-ils mes fichiers ?
+
+Impossible d'en être sûr. Certains publient une politique de conservation, mais rien dans le navigateur ne permet de la vérifier.
+
+### Les outils qui tournent dans le navigateur sont-ils sûrs ?
+
+S'ils tournent vraiment en local (vérifiez l'onglet Réseau), le fichier ne quitte pas votre appareil. La plupart ne font que lire, ou ne gèrent que quelques formats.
+
+---
+
+# Nettoyer les métadonnées en ligne de commande
+
+URL: https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/nettoyer-metadonnees-ligne-de-commande/
+Language: fr · Topic: systems
+
+**En bref:** Le binaire EOM est aussi un outil en ligne de commande : `eom risk CHEMIN -r` affiche le risque de chaque fichier et sort avec 0 (aucun ou faible), 1 (moyen) ou 2 (élevé) ; `eom clean CHEMIN -r --profile social --output-dir SORTIE` écrit des copies nettoyées ; `eom extract` exporte des rapports JSON, CSV, HTML ou texte ; `eom edit` modifie des champs ou décale des dates. Il fonctionne de la même façon sous Windows, macOS et Linux.
+
+## Les commandes
+
+```
+eom extract photo.jpg --format json         # afficher les métadonnées (txt, json, csv, html)
+eom extract ~/Images -r -o rapport.html     # rapport HTML récursif
+eom risk ~/Images -r -v                     # code de sortie : 0 aucun/faible, 1 moyen, 2 élevé
+eom clean ~/Images -r --profile social --output-dir ~/propre
+eom clean doc.pdf --categories location,identity --dry-run -v
+eom edit photo.jpg --author "Jeanne" --copyright "CC-BY 4.0" --shift +2h
+eom profiles                                # lister profils et catégories
+```
+
+Profils : `all`, `anonymous`, `social`, `keep_copyright`, `location`. Ou passez `--categories` avec : location, identity, identifiers, device, dates, software, thumbnail, copyright, technical, other.
+
+## Bloquer les fuites en CI
+
+`eom risk` sort avec 2 quand un fichier est à risque élevé, ce qui fait échouer une étape de CI. Utile pour le dossier d'images d'un site ou un dépôt de documentation :
+
+```
+- name: Aucune position ni auteur dans les images publiées
+  run: |
+    curl -sL -o eom.zip https://github.com/abogo-nono/eom/releases/latest/download/eom-linux-x86_64.zip
+    unzip -q eom.zip -d eom && chmod +x eom/eom
+    ./eom/eom risk public/images -r -v
+```
+
+Vous acceptez un risque moyen (dates, appareil) ? Traitez le code de sortie 1 comme un succès dans votre script.
+
+## Simulations et copies
+
+`--dry-run` montre ce qui serait supprimé sans rien écrire. `--output-dir` écrit des copies nettoyées et n'écrase jamais un fichier existant. Sans lui, les fichiers sont nettoyés sur place.
+
+## Questions
+
+### La CLI a-t-elle besoin d'un écran ?
+
+Non. Les commandes n'ouvrent aucune fenêtre. Le binaire charge tout de même les bibliothèques Qt : dans un conteneur minimal, installez d'abord `libegl1 libgl1 libxkbcommon0 libdbus-1-3`.
+
+### Puis-je utiliser ExifTool via la CLI d'EOM ?
+
+Oui, automatiquement : si ExifTool est installé, EOM s'en sert pour lire les fichiers et pour nettoyer les formats qu'il écrit sans risque.
+
+---

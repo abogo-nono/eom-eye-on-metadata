@@ -7,22 +7,26 @@
  * The Vercel copy (e-o-m.vercel.app) points search engines here.
  */
 export const SITE_URL = "https://abogo-nono.github.io/eom-eye-on-metadata";
+export const SITE_NAME = "EOM — Eye On Metadata";
 
 export const APP_VERSION = "2.2.1";
+export const APP_RELEASED = "2026-11-17";
 
 export const REPO_URL = "https://github.com/abogo-nono/eom";
+export const SITE_REPO_URL = "https://github.com/abogo-nono/eom-eye-on-metadata";
+export const AUTHOR_NAME = "Abogo Lincoln";
 export const AUTHOR_URL = "https://github.com/abogo-nono";
 export const RELEASES_URL = `${REPO_URL}/releases`;
 export const LATEST_RELEASE_URL = `${RELEASES_URL}/latest`;
 const LATEST_DOWNLOAD = `${RELEASES_URL}/latest/download`;
 
 export const DOWNLOADS = {
-  linux: `${LATEST_DOWNLOAD}/eom-linux-x86_64.zip`,
   windows: `${LATEST_DOWNLOAD}/eom-windows-x86_64.zip`,
   macos: `${LATEST_DOWNLOAD}/eom-macos-arm64.zip`,
+  linux: `${LATEST_DOWNLOAD}/eom-linux-x86_64.zip`,
 } as const;
 
-/** Path of a file in public/, prefixed with the deployment base ("/" or "/repo/"). */
+/** Path of a page or public file, prefixed with the deployment base ("/" or "/repo/"). */
 export function asset(path: string): string {
   return `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 }
@@ -31,3 +35,5 @@ export function asset(path: string): string {
 export function absolute(path = ""): string {
   return `${SITE_URL}/${path.replace(/^\//, "")}`;
 }
+
+export * from "@/content/slugs";

@@ -1,8 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { LandingPage } from "@/components/LandingPage";
-import { pageHead } from "@/seo";
+import { Page } from "@/components/case/shell";
+import { HomePage } from "@/components/case/home";
+import { homeHead } from "@/seo";
+import { PAGES } from "@/site";
 
 export const Route = createFileRoute("/")({
-  component: LandingPage,
-  head: () => pageHead("en"),
+  head: () => homeHead("en"),
+  component: () => (
+    <Page alternates={PAGES.home}>
+      <HomePage />
+    </Page>
+  ),
 });

@@ -1,70 +1,84 @@
 # EOM — Eye On Metadata
 
-EOM is a free, open-source, cross-platform desktop application (and command-line tool) that shows what files reveal through their metadata — location, author, device serial numbers, editing history — rates the privacy risk of each file, and removes the sensitive metadata. It runs entirely on the user's machine; no files are uploaded and no account is required.
+> EOM is a free, open-source (MIT) desktop app and command-line tool for Windows, macOS and Linux that shows the hidden metadata in photos, audio, video, PDF and Office files, rates each file's privacy risk (High, Medium, Low, Clean), and removes the metadata you choose with cleaning profiles. All processing is local: no upload, no account, no telemetry. Latest version: 2.2.1.
 
 ## Key facts
 
-- Latest version: 2.2.1
-- License: MIT
-- Website: https://abogo-nono.github.io/eom-eye-on-metadata/
-- Source code: https://github.com/abogo-nono/eom
 - Download (always the latest release): https://github.com/abogo-nono/eom/releases/latest
-- Author: Abogo Lincoln (https://github.com/abogo-nono)
-- Platforms: Windows 10+ (x86-64), macOS 14+ (Apple Silicon), Linux x86-64 (Ubuntu 20.04+ / glibc 2.31+)
-- Interface languages: English, French
-- Price: free
-
-## What EOM does
-
-- **Privacy-risk score**: every tag is classified (location, identity, unique IDs and serial numbers, device, dates, software, thumbnails, copyright, technical) and each file is rated High, Medium, Low or Clean from the most sensitive category it contains.
-- **Selective cleaning** with profiles: Remove everything, Full anonymity, Social media sharing, Keep copyright, Location only — or hand-picked categories and individual tags. A live preview shows which tags will be removed or kept.
-- **Safe by default**: cleaned copies can be written to another folder; EOM asks before modifying originals.
-- **Before / after verification**: every cleaned file is read again and compared with the original.
-- **Editing**: title, author, copyright, description and date; shift every date by a fixed offset (wrong camera clock); on one file or a whole folder.
-- **Export** to JSON, CSV, HTML report or plain text.
-- **Preview and map**: image, PDF and Office thumbnails, audio cover art; geotagged files on an OpenStreetMap map (opt-in).
-- **Command-line interface**: `eom extract | risk | clean | edit | profiles`.
-
-## Supported formats
-
-- **Images**: JPEG, PNG, TIFF, WebP, GIF, HEIC/HEIF (HEIC needs ExifTool)
-- **Audio**: MP3, FLAC, OGG, Opus, WAV, AIFF, M4A, WMA, APE, WavPack
-- **Video**: MP4, M4V, MOV, MKV, WebM
-- **Documents**: PDF, DOCX, XLSX, PPTX
-- **With ExifTool installed**: RAW camera files and hundreds of other formats (read)
-
-## Privacy model
-
-All processing happens locally. There is no telemetry, no analytics and no account. EOM never needs an internet connection. Its only two network features are off by default and must be enabled in Settings: loading map tiles from OpenStreetMap, and checking GitHub for a new release.
-
-## Command line examples
-
-```
-eom risk ~/Pictures -r                                   # exit code 0 clean/low, 1 medium, 2 high
-eom clean ~/Pictures -r --profile social --output-dir ~/clean
-eom extract ~/Documents -r -o report.html
-eom edit photo.jpg --author "Jane" --shift +2h
-```
-
-## Frequently asked questions
-
-**Does EOM upload my files?**
-No. Every operation is performed on your device.
-
-**How do I remove GPS location from a photo?**
-Drop the photo (or its folder) on EOM, choose the "Location only" or "Social media sharing" profile and click Clean. The preview shows what will be removed first; cleaned copies can be written to another folder.
-
-**Do I need ExifTool?**
-No. EOM uses ExifTool when it is installed and its built-in readers (Pillow, mutagen, pypdf) otherwise. The Windows download bundles ExifTool.
-
-**How is EOM different from online metadata tools?**
-Online tools upload your file to a server. EOM processes everything locally, handles whole folders and rates the privacy risk of each file.
-
-## Links
-
+- Source code: https://github.com/abogo-nono/eom
 - Website: https://abogo-nono.github.io/eom-eye-on-metadata/ (French: https://abogo-nono.github.io/eom-eye-on-metadata/fr/)
-- GitHub repository: https://github.com/abogo-nono/eom
-- Latest release and notes: https://github.com/abogo-nono/eom/releases/latest
-- Windows download: https://github.com/abogo-nono/eom/releases/latest/download/eom-windows-x86_64.zip
-- macOS download: https://github.com/abogo-nono/eom/releases/latest/download/eom-macos-arm64.zip
-- Linux download: https://github.com/abogo-nono/eom/releases/latest/download/eom-linux-x86_64.zip
+- In-browser photo metadata checker (reads locally, uploads nothing): https://abogo-nono.github.io/eom-eye-on-metadata/check/
+- Platforms: Windows 10+ (x86-64, ExifTool bundled), macOS 14+ (Apple Silicon), Linux x86-64 (glibc 2.31+, Ubuntu 20.04+)
+- Formats: JPEG, PNG, TIFF, WebP, GIF, HEIC; MP3, FLAC, OGG, Opus, WAV, AIFF, M4A, WMA, APE, WavPack; MP4, M4V, MOV, MKV, WebM; PDF, DOCX, XLSX, PPTX
+- Cleaning profiles: Remove everything; Full anonymity; Social media sharing; Keep copyright; Location only; or custom categories and tags
+- Risk categories: location, identity, unique IDs/serials (high); device, dates, software, thumbnails (medium); copyright, other (low); technical (none)
+- Network: none needed; map tiles and update check are opt-in and off by default
+- Author: Abogo Lincoln (https://github.com/abogo-nono)
+
+## Guides
+
+- [How to remove the GPS location from a photo](https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-gps-location-from-photos/): Photos can store the exact place they were taken. Check and remove the GPS location on Windows, Mac, Linux, iPhone and Android, for one photo or a whole folder.
+- [Remove the location from iPhone and Android photos](https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-location-from-iphone-android-photos/): Your phone geotags every photo by default. How to share without location on iPhone and Android, stop recording it, and clean photos you already took.
+- [What is EXIF data?](https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-is-exif-data/): EXIF is the hidden data cameras and phones store inside every photo: camera, settings, date, often GPS and serial numbers. What it contains, who can read it, how to remove it.
+- [What your photo metadata reveals about you](https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-photo-metadata-reveals/): Location, identity, serial numbers, devices, routines, editing history: what hidden metadata says about you, with a real case, and how EOM rates the risk.
+- [How to remove metadata from a PDF, properly](https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-from-pdf/): PDFs store author, software, company and dates in two places, and quick edits can leave old values recoverable. How to really remove PDF metadata.
+- [Remove metadata from Word, Excel and PowerPoint files](https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-word-excel-powerpoint/): Office files store author, company, editing time and the names behind tracked changes. How to remove it with Inspect Document or in one go with EOM.
+- [Remove metadata from MP3, MP4 and video files](https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mp3-mp4-video/): Audio and video files carry tags too: artist, comments, encoder, cover art, and phone videos often a location. How to see and remove them.
+- [How to remove metadata on Windows](https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-windows/): Windows has a built-in way to remove file properties, with limits. How to use it, and how to clean photos, PDFs and Office files in bulk for free.
+- [How to remove metadata on a Mac](https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mac/): macOS can remove a photo's location in Preview and Photos, but not much else. How to clean photos, PDFs and Office files on a Mac, one by one or in bulk.
+- [How to remove metadata on Linux](https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-linux/): Remove metadata from photos, PDFs, Office and audio files on Linux: ExifTool and mat2 on the command line, or EOM with a GUI and file-manager integration.
+- [Are online metadata removers safe?](https://abogo-nono.github.io/eom-eye-on-metadata/guides/online-metadata-remover-risks/): Uploading a file to remove its private data means giving that data to someone else first. The risks of online metadata removers and what to use instead.
+- [Strip metadata from the command line](https://abogo-nono.github.io/eom-eye-on-metadata/guides/strip-metadata-command-line/): Batch-clean photos, PDFs, Office and audio files from a terminal or a CI pipeline with the EOM CLI: risk checks with exit codes, profiles, dry runs.
+
+## Guides (français)
+
+- [Comment supprimer la position GPS d'une photo](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-position-gps-photo/): Vos photos peuvent indiquer l'endroit exact où elles ont été prises. Vérifiez et supprimez la position GPS sur Windows, Mac, Linux, iPhone et Android, pour une photo ou un dossier.
+- [Supprimer la position des photos iPhone et Android](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-position-photos-iphone-android/): Votre téléphone géolocalise chaque photo par défaut. Partager sans position sur iPhone et Android, ne plus l'enregistrer, et nettoyer les photos déjà prises.
+- [Qu'est-ce que les données EXIF ?](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/quest-ce-que-les-donnees-exif/): L'EXIF, ce sont les données cachées que les appareils photo et téléphones stockent dans chaque photo : appareil, réglages, date, souvent GPS et numéro de série.
+- [Ce que les métadonnées de vos photos révèlent sur vous](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/ce-que-revelent-les-metadonnees/): Position, identité, numéros de série, appareils, habitudes, historique : ce que disent les métadonnées cachées, avec un cas réel, et comment EOM évalue le risque.
+- [Comment supprimer les métadonnées d'un PDF, correctement](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-pdf/): Un PDF stocke auteur, logiciel, société et dates à deux endroits, et une modification rapide peut laisser les anciennes valeurs récupérables. Comment vraiment les supprimer.
+- [Supprimer les métadonnées des fichiers Word, Excel et PowerPoint](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-word-excel-powerpoint/): Les fichiers Office stockent auteur, société, temps d'édition et le nom derrière chaque modification suivie. Les supprimer avec l'Inspecteur de document ou en une fois avec EOM.
+- [Supprimer les métadonnées des fichiers MP3, MP4 et vidéo](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-mp3-video/): Les fichiers audio et vidéo ont aussi leurs balises : artiste, commentaires, encodeur, pochette, et souvent une position pour les vidéos de téléphone. Les voir et les supprimer.
+- [Comment supprimer les métadonnées sous Windows](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-windows/): Windows sait supprimer des propriétés de fichiers, avec des limites. Comment l'utiliser, et comment nettoyer photos, PDF et fichiers Office en masse, gratuitement.
+- [Comment supprimer les métadonnées sur Mac](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-mac/): macOS sait retirer la position d'une photo dans Aperçu et Photos, pas beaucoup plus. Nettoyer photos, PDF et fichiers Office sur Mac, un par un ou en masse.
+- [Comment supprimer les métadonnées sous Linux](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-linux/): Supprimer les métadonnées de photos, PDF, fichiers Office et audio sous Linux : ExifTool et mat2 en ligne de commande, ou EOM avec une interface et l'intégration au gestionnaire de fichiers.
+- [Les outils en ligne de suppression des métadonnées sont-ils sûrs ?](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/outils-en-ligne-suppression-metadonnees/): Envoyer un fichier pour en retirer les données privées, c'est d'abord les donner à quelqu'un d'autre. Les risques des outils en ligne et quoi utiliser à la place.
+- [Nettoyer les métadonnées en ligne de commande](https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/nettoyer-metadonnees-ligne-de-commande/): Nettoyer en masse photos, PDF, fichiers Office et audio depuis un terminal ou une CI avec la CLI d'EOM : contrôle du risque par code de sortie, profils, simulations.
+
+## FAQ
+
+### What is EOM?
+
+EOM (Eye On Metadata) is a free, open-source desktop app for Windows, macOS and Linux that shows the hidden metadata in photos, audio, video, PDF and Office files, rates the privacy risk of each file, and removes the metadata you choose. Everything happens on your computer.
+
+### How do I remove the GPS location from a photo?
+
+Drop the photo (or its folder) on EOM, choose the “Location only” or “Social media sharing” profile and click Clean. The preview shows which tags will be removed before anything changes. See the full guide for the built-in tools of each system.
+
+### Does EOM upload my files?
+
+No. EOM has no server and no account. Files are read and cleaned on your computer. The only network features, map tiles and the update check, are off by default.
+
+### Is EOM free?
+
+Yes. EOM is free and open source under the MIT licence. There is no paid version, no subscription and no account.
+
+### Which files can EOM clean?
+
+Photos (JPEG, PNG, TIFF, WebP, GIF, HEIC), audio (MP3, FLAC, OGG, Opus, WAV, AIFF, M4A, WMA, APE, WavPack), video (MP4, M4V, MOV, MKV, WebM), PDF and Office documents (DOCX, XLSX, PPTX).
+
+### How is the privacy risk calculated?
+
+Each tag is sorted into a category. Location, identity and serial numbers are high risk; device, dates, software and thumbnails are medium; copyright is low; technical tags carry no risk. A file takes the rating of its most sensitive category. Details.
+
+### Can I check a photo without installing anything?
+
+Yes. The photo checker on this site reads a photo's metadata in your browser and shows its risk. It doesn't upload the file. To remove the metadata, use the EOM app.
+
+### Does EOM need ExifTool?
+
+No. EOM uses ExifTool when it's installed, for deeper metadata such as XMP, IPTC, maker notes and RAW files, and its built-in readers otherwise. The Windows download includes ExifTool.
+
+## Optional
+
+- [Full text of every guide](https://abogo-nono.github.io/eom-eye-on-metadata/llms-full.txt)

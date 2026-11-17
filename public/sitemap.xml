@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://abogo-nono.github.io/eom-eye-on-metadata/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/"/>
     <lastmod>2026-11-17</lastmod>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
@@ -16,7 +15,259 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/"/>
     <lastmod>2026-11-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/check/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/check/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/verifier/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/check/"/>
+    <lastmod>2026-11-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/verifier/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/check/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/verifier/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/check/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-gps-location-from-photos/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-gps-location-from-photos/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-position-gps-photo/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-gps-location-from-photos/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-position-gps-photo/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-gps-location-from-photos/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-position-gps-photo/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-gps-location-from-photos/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-location-from-iphone-android-photos/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-location-from-iphone-android-photos/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-position-photos-iphone-android/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-location-from-iphone-android-photos/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-position-photos-iphone-android/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-location-from-iphone-android-photos/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-position-photos-iphone-android/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-location-from-iphone-android-photos/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-is-exif-data/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-is-exif-data/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/quest-ce-que-les-donnees-exif/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-is-exif-data/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/quest-ce-que-les-donnees-exif/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-is-exif-data/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/quest-ce-que-les-donnees-exif/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-is-exif-data/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-photo-metadata-reveals/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-photo-metadata-reveals/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/ce-que-revelent-les-metadonnees/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-photo-metadata-reveals/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/ce-que-revelent-les-metadonnees/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-photo-metadata-reveals/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/ce-que-revelent-les-metadonnees/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/what-photo-metadata-reveals/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-from-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-from-pdf/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-pdf/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-from-pdf/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-pdf/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-from-pdf/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-pdf/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-from-pdf/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-word-excel-powerpoint/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-word-excel-powerpoint/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-word-excel-powerpoint/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-word-excel-powerpoint/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-word-excel-powerpoint/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-word-excel-powerpoint/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-word-excel-powerpoint/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-word-excel-powerpoint/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mp3-mp4-video/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mp3-mp4-video/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-mp3-video/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mp3-mp4-video/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-mp3-video/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mp3-mp4-video/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-mp3-video/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mp3-mp4-video/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-windows/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-windows/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-windows/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-windows/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-windows/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-windows/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-windows/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-windows/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mac/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mac/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-mac/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mac/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-mac/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mac/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-mac/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-mac/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-linux/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-linux/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-linux/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-linux/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-linux/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-linux/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/supprimer-metadonnees-linux/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/remove-metadata-linux/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/online-metadata-remover-risks/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/online-metadata-remover-risks/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/outils-en-ligne-suppression-metadonnees/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/online-metadata-remover-risks/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/outils-en-ligne-suppression-metadonnees/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/online-metadata-remover-risks/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/outils-en-ligne-suppression-metadonnees/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/online-metadata-remover-risks/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/guides/strip-metadata-command-line/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/strip-metadata-command-line/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/nettoyer-metadonnees-ligne-de-commande/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/strip-metadata-command-line/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/nettoyer-metadonnees-ligne-de-commande/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/strip-metadata-command-line/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://abogo-nono.github.io/eom-eye-on-metadata/fr/guides/nettoyer-metadonnees-ligne-de-commande/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://abogo-nono.github.io/eom-eye-on-metadata/guides/strip-metadata-command-line/"/>
+    <lastmod>2026-11-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

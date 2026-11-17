@@ -1,27 +1,26 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-import { useLocale, useT } from "@/i18n/useLocale";
+import { Outlet, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { useLocale, useUI } from "@/i18n/useLocale";
+import { Page, Stamp } from "@/components/case/shell";
+import { asset, pagePath } from "@/site";
 
 import appCss from "../styles.css?url";
-import { asset } from "@/site";
 
 function NotFoundComponent() {
-  const t = useT();
+  const ui = useUI();
+  const locale = useLocale();
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">{t("notFoundTitle")}</h2>
-        <p className="mt-2 text-sm text-muted-foreground">{t("notFoundDesc")}</p>
-        <div className="mt-6">
-          <Link
-            to="/"
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
-          >
-            {t("notFoundGoHome")}
-          </Link>
-        </div>
-      </div>
-    </div>
+    <Page alternates={{ en: "/", fr: "/fr/" }}>
+      <section className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-start justify-center px-4 py-24 sm:px-6">
+        <Stamp className="text-marker text-2xl" rotate={-6}>
+          404
+        </Stamp>
+        <h1 className="display mt-8 text-6xl uppercase sm:text-8xl">{ui.notFound.title}</h1>
+        <p className="mt-5 text-lg text-dust">{ui.notFound.desc}</p>
+        <a href={asset(pagePath("home", locale))} className="btn-ink mt-10">
+          {ui.notFound.home}
+        </a>
+      </section>
+    </Page>
   );
 }
 
@@ -30,18 +29,17 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "robots", content: "index, follow" },
-      { name: "theme-color", content: "#0b0f0f" },
+      { name: "theme-color", content: "#11100e" },
+      { name: "color-scheme", content: "dark" },
+      { name: "generator", content: "EOM website" },
     ],
     links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: appCss },
       { rel: "icon", href: asset("/app-logo.ico") },
     ],
   }),
   shellComponent: RootShell,
-  component: RootComponent,
+  component: () => <Outlet />,
   notFoundComponent: NotFoundComponent,
 });
 
@@ -58,8 +56,4 @@ function RootShell({ children }: { children: React.ReactNode }) {
       </body>
     </html>
   );
-}
-
-function RootComponent() {
-  return <Outlet />;
 }

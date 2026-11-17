@@ -6,7 +6,7 @@ EOM is a free, open-source, cross-platform desktop application (and command-line
 
 - Latest version: 2.2.1
 - License: MIT
-- Website: https://e-o-m.vercel.app/
+- Website: https://abogo-nono.github.io/eom-eye-on-metadata/
 - Source code: https://github.com/abogo-nono/eom
 - Download (always the latest release): https://github.com/abogo-nono/eom/releases/latest
 - Author: Abogo Lincoln (https://github.com/abogo-nono)
@@ -62,7 +62,7 @@ Online tools upload your file to a server. EOM processes everything locally, han
 
 ## Links
 
-- Website: https://e-o-m.vercel.app/ (French: https://e-o-m.vercel.app/fr/)
+- Website: https://abogo-nono.github.io/eom-eye-on-metadata/ (French: https://abogo-nono.github.io/eom-eye-on-metadata/fr/)
 - GitHub repository: https://github.com/abogo-nono/eom
 - Latest release and notes: https://github.com/abogo-nono/eom/releases/latest
 - Windows download: https://github.com/abogo-nono/eom/releases/latest/download/eom-windows-x86_64.zip

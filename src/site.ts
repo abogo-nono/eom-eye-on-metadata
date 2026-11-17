@@ -3,11 +3,10 @@
 // point at the latest GitHub release, so they never need editing.
 
 /**
- * Canonical public URL of the site, without a trailing slash.
- * Vercel for now: GitHub Pages needs this repository to be public
- * (https://abogo-nono.github.io/eom-eye-on-metadata once it is).
+ * Canonical public URL of the site (GitHub Pages), without a trailing slash.
+ * The Vercel copy (e-o-m.vercel.app) points search engines here.
  */
-export const SITE_URL = "https://e-o-m.vercel.app";
+export const SITE_URL = "https://abogo-nono.github.io/eom-eye-on-metadata";
 
 export const APP_VERSION = "2.2.1";
 

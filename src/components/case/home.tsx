@@ -233,7 +233,7 @@ function Hero() {
           >
             {h.heroFacts.map((f) => (
               <li key={f} className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 bg-marker" aria-hidden="true" />
+                <span className="h-1.5 w-1.5 bg-eye" aria-hidden="true" />
                 {f}
               </li>
             ))}
@@ -285,7 +285,7 @@ function GivesAway() {
                   className="absolute left-5 top-4 h-3 w-3 rounded-full border-2 border-dust/60"
                   aria-hidden="true"
                 />
-                <span className="display absolute right-5 top-2 text-6xl text-marker/90">
+                <span className="display absolute right-5 top-2 text-6xl text-eye/90">
                   {letter}
                 </span>
                 <h3 className="display mt-6 text-3xl uppercase">{title}</h3>
@@ -394,12 +394,12 @@ function RedactionLevels() {
                   onClick={() => setProfile(p)}
                   className={`group grid grid-cols-[1.4rem_1fr] gap-3 border-l-4 px-4 py-3 text-left transition-colors ${
                     active
-                      ? "border-marker bg-white/[0.06]"
+                      ? "border-eye bg-white/[0.06]"
                       : "border-transparent hover:bg-white/[0.03]"
                   }`}
                 >
                   <span
-                    className={`mt-1 h-4 w-4 border-2 ${active ? "border-marker bg-marker" : "border-dust"}`}
+                    className={`mt-1 h-4 w-4 border-2 ${active ? "border-eye bg-eye" : "border-dust"}`}
                     aria-hidden="true"
                   />
                   <span>
@@ -461,7 +461,7 @@ function Proof() {
               <li className="kicker !text-bone">{h.notesHeading}</li>
               {h.notes.map((n) => (
                 <li key={n} className="flex gap-3 text-[15px] text-dust">
-                  <span className="typewriter text-marker">→</span>
+                  <span className="typewriter text-eye">→</span>
                   {n}
                 </li>
               ))}
@@ -523,7 +523,7 @@ function Formats() {
       <dl className="divide-y divide-white/10">
         {h.formatGroups.map(([group, list]) => (
           <div key={group} className="grid gap-2 py-5 sm:grid-cols-[12rem_1fr]">
-            <dt className="display text-3xl uppercase text-marker">{group}</dt>
+            <dt className="display text-3xl uppercase text-eye">{group}</dt>
             <dd className="typewriter text-lg text-bone">{list}</dd>
           </div>
         ))}
@@ -542,7 +542,7 @@ function Privacy() {
           <p className="kicker !text-ink-soft">{h.privacyKicker}</p>
           <h2 className="display mt-4 text-5xl uppercase sm:text-7xl">
             {h.privacyHeadingA}
-            <span className="mt-2 block text-marker">{h.privacyHeadingB}</span>
+            <span className="mt-2 block text-eye-deep">{h.privacyHeadingB}</span>
           </h2>
           <p className="mt-8 max-w-xl text-lg leading-relaxed">{h.privacyBody}</p>
           <p className="mt-4 max-w-xl text-lg leading-relaxed">{h.privacySite}</p>
@@ -597,7 +597,7 @@ function CommandLine() {
                 {i > 0 && "\n"}
                 <span className="text-dust"># {comment}</span>
                 {"\n"}
-                <span className="select-none text-marker">$ </span>
+                <span className="select-none text-eye">$ </span>
                 {cmd}
                 {"\n"}
               </span>
@@ -645,10 +645,10 @@ function CaseNotes() {
                   href={asset(guidePath(key, locale))}
                   className="group block h-full p-6 transition-colors hover:bg-white/[0.04]"
                 >
-                  <span className="typewriter text-xs text-marker">
+                  <span className="typewriter text-xs text-eye">
                     N° {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="mt-3 text-xl font-bold leading-snug text-bone group-hover:underline group-hover:decoration-marker group-hover:decoration-2 group-hover:underline-offset-4">
+                  <h3 className="mt-3 text-xl font-bold leading-snug text-bone group-hover:underline group-hover:decoration-eye group-hover:decoration-2 group-hover:underline-offset-4">
                     {g.h1}
                   </h3>
                   <p className="mt-2 line-clamp-3 text-sm text-dust">{g.description}</p>
@@ -674,7 +674,7 @@ function Faq() {
             <summary className="flex list-none items-start justify-between gap-6 text-lg font-bold text-bone [&::-webkit-details-marker]:hidden">
               {q}
               <span
-                className="typewriter mt-0.5 text-marker transition-transform group-open:rotate-45"
+                className="typewriter mt-0.5 text-eye transition-transform group-open:rotate-45"
                 aria-hidden="true"
               >
                 +
@@ -721,7 +721,7 @@ function Download() {
   return (
     <section
       id="download"
-      className="scroll-mt-16 relative overflow-hidden border-t-4 border-marker bg-[#0c0b0a]"
+      className="scroll-mt-16 relative overflow-hidden border-t-4 border-eye bg-[#0c0b0a]"
     >
       <div className="pointer-events-none absolute -right-24 top-10 select-none opacity-[0.06]">
         <Stamp className="text-bone text-[10rem]" rotate={-12}>
@@ -768,7 +768,7 @@ function Download() {
             <Rich text={h.dlHelpMac} />
           </p>
           <p className="pt-3">
-            <a href={LATEST_RELEASE_URL} className="link-marker text-bone">
+            <a href={LATEST_RELEASE_URL} className="link-eye text-bone">
               {h.dlNotes} ↗
             </a>
           </p>

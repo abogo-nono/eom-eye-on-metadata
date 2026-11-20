@@ -179,7 +179,7 @@ export function Checker({ compact = false }: { compact?: boolean }) {
           style={{ transform: over ? "rotate(-0.4deg)" : "rotate(0.3deg)" }}
         >
           <span
-            className={`pointer-events-none absolute inset-4 border-2 border-dashed transition-colors ${over ? "border-marker" : "border-ink/25 group-hover:border-ink/50"}`}
+            className={`pointer-events-none absolute inset-4 border-2 border-dashed transition-colors ${over ? "border-eye-deep" : "border-ink/25 group-hover:border-ink/50"}`}
           />
           {state.kind === "reading" ? (
             <p className="typewriter text-lg text-ink">{t.reading}</p>
@@ -205,7 +205,7 @@ export function Checker({ compact = false }: { compact?: boolean }) {
                 <path
                   d="M40 4v18m-7-7 7 7 7-7"
                   fill="none"
-                  stroke="var(--marker)"
+                  stroke="var(--eye-deep)"
                   strokeWidth="3.5"
                 />
               </svg>
@@ -214,7 +214,7 @@ export function Checker({ compact = false }: { compact?: boolean }) {
               <p className="typewriter mt-6 text-xs tracking-[0.2em] text-ink-soft">
                 {t.dropFormats}
               </p>
-              <p className="hand mt-4 text-2xl text-marker">{t.local}</p>
+              <p className="hand mt-4 text-2xl text-eye-deep">{t.local}</p>
             </>
           )}
         </label>
@@ -366,7 +366,7 @@ function Result({
                   </dl>
                   {cat === "location" && state.gps && (
                     <a
-                      className="typewriter mt-2 inline-block text-sm text-marker underline underline-offset-4"
+                      className="typewriter mt-2 inline-block text-sm text-eye-deep underline underline-offset-4"
                       href={`https://www.openstreetmap.org/?mlat=${state.gps[0]}&mlon=${state.gps[1]}#map=17/${state.gps[0]}/${state.gps[1]}`}
                       target="_blank"
                       rel="noopener noreferrer"

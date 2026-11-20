@@ -67,7 +67,7 @@ export function CheckPage() {
             <ol className="mt-6 space-y-4">
               {c.how.map((step, i) => (
                 <li key={i} className="grid grid-cols-[2.5rem_1fr] gap-2 text-[#d8d0c1]">
-                  <span className="typewriter text-marker">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="typewriter text-eye">{String(i + 1).padStart(2, "0")}</span>
                   {step}
                 </li>
               ))}
@@ -122,7 +122,7 @@ export function GuidesIndexPage() {
                         className="group grid gap-2 py-6 transition-colors hover:bg-white/[0.03] sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-8 sm:px-3"
                       >
                         <span>
-                          <span className="block text-xl font-bold text-bone group-hover:underline group-hover:decoration-marker group-hover:decoration-2 group-hover:underline-offset-4">
+                          <span className="block text-xl font-bold text-bone group-hover:underline group-hover:decoration-eye group-hover:decoration-2 group-hover:underline-offset-4">
                             {guide.h1}
                           </span>
                           <span className="mt-1 block text-dust">{guide.description}</span>
@@ -180,7 +180,7 @@ function Block({ p }: { p: Para }) {
     );
   if ("note" in p)
     return (
-      <aside className="my-6 border-l-4 border-marker bg-white/[0.04] px-5 py-4 text-[15px]">
+      <aside className="my-6 border-l-4 border-eye bg-white/[0.04] px-5 py-4 text-[15px]">
         <Rich text={p.note} />
       </aside>
     );
@@ -252,7 +252,7 @@ export function GuidePage({ guideKey }: { guideKey: GuideKey }) {
             className="paper relative rotate-[-0.4deg] px-6 py-6 sm:px-8"
             aria-labelledby="short"
           >
-            <span className="typewriter absolute -top-3 left-5 bg-marker px-2.5 py-0.5 text-xs font-bold uppercase tracking-[0.16em] text-white">
+            <span className="typewriter absolute -top-3 left-5 bg-eye px-2.5 py-0.5 text-xs font-bold uppercase tracking-[0.16em] text-desk">
               {t.short}
             </span>
             <h2 id="short" className="sr-only">
@@ -286,7 +286,7 @@ export function GuidePage({ guideKey }: { guideKey: GuideKey }) {
             </section>
           </div>
 
-          <aside className="mt-14 border-2 border-marker p-6 sm:p-8">
+          <aside className="mt-14 border-2 border-eye p-6 sm:p-8">
             <h2 className="display text-4xl uppercase">{t.ctaHeading}</h2>
             <p className="mt-3 text-[#d8d0c1]">{t.ctaBody}</p>
             <div className="mt-6 flex flex-wrap gap-4">
@@ -323,7 +323,7 @@ export function GuidePage({ guideKey }: { guideKey: GuideKey }) {
             <ul className="mt-4 space-y-3">
               {related.map((key) => (
                 <li key={key}>
-                  <a href={asset(guidePath(key, locale))} className="link-marker text-sm text-bone">
+                  <a href={asset(guidePath(key, locale))} className="link-eye text-sm text-bone">
                     {GUIDES[locale][key].h1}
                   </a>
                 </li>

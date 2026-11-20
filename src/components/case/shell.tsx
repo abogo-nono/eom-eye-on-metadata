@@ -161,7 +161,7 @@ function LangSwitcher() {
   const alternates = useAlternates();
   const ui = useUI();
   const item = (active: boolean) =>
-    `px-1.5 py-0.5 transition-colors ${active ? "text-bone underline decoration-marker decoration-2 underline-offset-4" : "text-dust hover:text-bone"}`;
+    `px-1.5 py-0.5 transition-colors ${active ? "text-bone underline decoration-eye decoration-2 underline-offset-4" : "text-dust hover:text-bone"}`;
   return (
     <nav aria-label={ui.shell.langLabel} className="typewriter flex items-center gap-1 text-sm">
       <a href={asset(alternates.en)} hrefLang="en" lang="en" className={item(locale === "en")}>
@@ -191,7 +191,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b border-white/10 bg-desk/90 backdrop-blur-md">
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:bg-marker focus:px-3 focus:py-1 focus:text-white"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:bg-eye focus:px-3 focus:py-1 focus:text-desk"
       >
         {ui.shell.skip}
       </a>
@@ -282,7 +282,7 @@ export function Footer() {
           <p className="mt-3 max-w-sm text-sm text-dust">{ui.shell.footerSite}</p>
           <p className="typewriter mt-5 text-xs text-dust">
             v{APP_VERSION} · MIT ·{" "}
-            <a className="link-marker" href={AUTHOR_URL}>
+            <a className="link-eye" href={AUTHOR_URL}>
               {ui.shell.footerAuthor}
             </a>
           </p>

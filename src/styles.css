@@ -11,7 +11,9 @@
 /*
  * "Case file" identity.
  * The page is a dark desk; evidence sheets are light paper on top of it.
- * Ink and red marker are the only accents. Redaction bars are pure black.
+ * Cyan (the app's eye) is the action colour: buttons, links, focus, structure.
+ * Deep teal replaces it on paper, where bright cyan lacks contrast.
+ * Red marker is kept for danger and evidence notes. Redaction bars are pure black.
  */
 
 @theme inline {
@@ -62,6 +64,8 @@
   --color-tape: var(--tape);
   --color-redact: var(--redact);
   --color-eye: var(--eye);
+  --color-eye-soft: var(--eye-soft);
+  --color-eye-deep: var(--eye-deep);
 }
 
 :root {
@@ -80,6 +84,8 @@
   --tape: rgba(226, 214, 170, 0.55);
   --redact: #050505;
   --eye: #3fd0cf;
+  --eye-soft: #7ee3e1;
+  --eye-deep: #136170;
 
   --background: var(--desk);
   --foreground: var(--bone);
@@ -87,19 +93,19 @@
   --card-foreground: var(--bone);
   --popover: var(--desk-2);
   --popover-foreground: var(--bone);
-  --primary: var(--marker);
-  --primary-foreground: #fff;
+  --primary: var(--eye);
+  --primary-foreground: var(--desk);
   --secondary: #24211c;
   --secondary-foreground: var(--bone);
   --muted: #24211c;
   --muted-foreground: var(--dust);
-  --accent: var(--marker);
-  --accent-foreground: #fff;
+  --accent: var(--eye);
+  --accent-foreground: var(--desk);
   --destructive: var(--marker);
   --destructive-foreground: #fff;
   --border: #34302a;
   --input: #34302a;
-  --ring: var(--marker-soft);
+  --ring: var(--eye-soft);
   --success: #7fbf6a;
   --success-foreground: var(--ink);
   --warning: #e8b34a;
@@ -138,8 +144,8 @@
   }
 
   ::selection {
-    background: var(--marker);
-    color: #fff;
+    background: var(--eye);
+    color: var(--desk);
   }
 
   code,
@@ -149,8 +155,13 @@
   }
 
   :focus-visible {
-    outline: 2px dashed var(--marker-soft);
+    outline: 2px dashed var(--eye-soft);
     outline-offset: 3px;
+  }
+
+  /* Bright cyan disappears on paper: use the deep teal there. */
+  :is(.paper, .bg-paper, .bg-bone) :focus-visible {
+    outline-color: var(--eye-deep);
   }
 
   summary {
@@ -255,8 +266,8 @@
     justify-content: center;
     gap: 0.6rem;
     padding: 0.95rem 1.4rem 0.85rem;
-    background: var(--marker);
-    color: #fff;
+    background: var(--eye);
+    color: var(--desk);
     font-family: var(--font-sans);
     font-stretch: 80%;
     font-weight: 800;
@@ -273,7 +284,7 @@
   .btn-ink:hover {
     transform: translate(-2px, -2px);
     box-shadow: 6px 6px 0 var(--redact);
-    background: #ef3d29;
+    background: var(--eye-soft);
   }
 
   .btn-ink:active {
@@ -318,16 +329,16 @@
     color: var(--paper);
   }
 
-  .link-marker {
+  .link-eye {
     text-decoration: underline;
-    text-decoration-color: var(--marker);
+    text-decoration-color: var(--eye);
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
     transition: color 0.15s ease;
   }
 
-  .link-marker:hover {
-    color: var(--marker-soft);
+  .link-eye:hover {
+    color: var(--eye-soft);
   }
 
   /* Dotted leader between a label and its value, like a form */
@@ -393,7 +404,7 @@
   }
 
   .prose-case li::marker {
-    color: var(--marker);
+    color: var(--eye);
     font-family: var(--font-mono);
   }
 
@@ -406,13 +417,13 @@
 
   .prose-case a {
     text-decoration: underline;
-    text-decoration-color: var(--marker);
+    text-decoration-color: var(--eye);
     text-decoration-thickness: 2px;
     text-underline-offset: 3px;
   }
 
   .prose-case a:hover {
-    color: var(--marker-soft);
+    color: var(--eye-soft);
   }
 }
 
